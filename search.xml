@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>elementplus踩坑</title>
+      <link href="posts/753e8c51.html"/>
+      <url>posts/753e8c51.html</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="坑一：elememt-plus-版本问题"><a href="#坑一：elememt-plus-版本问题" class="headerlink" title="坑一：elememt-plus 版本问题"></a>坑一：elememt-plus 版本问题</h3><p>在引入element-plus插件时的坑</p><p>视频版本是1.0.2beta64</p><p>此时通过npm安装的最新版本为1.1.0beta12</p><p>然而组件库在1.1.0版本做了一次breaking changes</p><p>修改了引入的方式 通过查阅文档后修复</p><p><a href="https://github.com/element-plus/element-plus/discussions/3020">Breaking changes made in 1.1.0-beta.1 · Discussion #3020 · element-plus/element-plus (github.com)</a></p><h3 id="坑二-还是element-plus问题"><a href="#坑二-还是element-plus问题" class="headerlink" title="坑二 还是element-plus问题"></a>坑二 还是element-plus问题</h3><p>没安装之前一切正常  安装好element-plus后  npm run serve 直接报错</p><pre class="line-numbers language-PowerShell" data-language="PowerShell"><code class="language-PowerShell">vue项目引入ElementUI-plus运行npm run serve后出现报错，网页内容无法显示：“export ‘createElementBlock‘ (imported as ‘_createElementBlock‘) was not found in ‘vue‘<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>进度98%  大概跟导包方式有关系</p><p>解决方案：升级vue版本<br> 升级vue 到最新版本 执行 npm install <a href="mailto:vue@3.2.4">vue@3.2.4</a> –force</p><p>升级后报错消失 网页正常显示</p><p>这个element-plus 更新太快了 让我看一个月前的课程看起来像是一年前的一样hhhh</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
+</search>
