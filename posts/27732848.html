@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="CSS之两栏三栏布局, 计算机 前端">
+    <meta name="keywords" content="计网之TCP与UDP, 计算机 前端">
     <meta name="description" content="本科 | 计算机科学与技术">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>CSS之两栏三栏布局 | Jeff</title>
+    <title>计网之TCP与UDP | Jeff</title>
 
     <link rel="icon" type="image/jpeg" href="https://s1.ax1x.com/2020/05/17/YR20js.jpg">
 
@@ -510,12 +510,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928020319.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928020704.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">CSS之两栏三栏布局</h1>
+                    <h1 class="description center-align post-title">计网之TCP与UDP</h1>
                 </div>
             </div>
         </div>
@@ -636,8 +636,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/CSS/">
-                                <span class="chip bg-color">CSS</span>
+                            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                                <span class="chip bg-color">计算机网络</span>
                             </a>
                         
                     </div>
@@ -652,28 +652,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-10-20
+                    2021-10-21
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-10-20
+                    2021-10-21
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.5k
+                    2.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    8 分
                 </div>
                 
 
@@ -691,282 +691,134 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="两栏、三栏布局"><a href="#两栏、三栏布局" class="headerlink" title="两栏、三栏布局"></a>两栏、三栏布局</h1><h2 id="一、概念"><a href="#一、概念" class="headerlink" title="一、概念"></a>一、概念</h2><h3 id="两栏布局"><a href="#两栏布局" class="headerlink" title="两栏布局"></a>两栏布局</h3><p>两栏布局实现效果就是将页面分割成左右宽度不等的两列，宽度较小的列设置为固定宽度，剩余宽度由另一列撑满，</p>
-<p>比如 <code>Ant Design</code> 文档，蓝色区域为主要内容布局容器，侧边栏为次要内容布局容器</p>
-<p><strong>这里称宽度较小的列父元素为次要布局容器，宽度较大的列父元素为主要布局容器</strong></p>
-<p><img src="https://gitee.com/robertjeff/imagebed/raw/master/images/202110201747792.png" alt="Ant Design"></p>
-<p>这种布局适用于内容上具有明显主次关系的网页</p>
-<h3 id="三栏布局"><a href="#三栏布局" class="headerlink" title="三栏布局"></a>三栏布局</h3><p>三栏布局按照左中右的顺序进行排列，通常中间列最宽，左右两列次之</p>
-<p>最常见的就是<code>github</code>：</p>
-<p><img src="https://gitee.com/robertjeff/imagebed/raw/master/images/202110201748297.png" alt="github"></p>
-<h2 id="二、两栏布局"><a href="#二、两栏布局" class="headerlink" title="二、两栏布局"></a>二、两栏布局</h2><p>双栏布局非常常见，往往是以一个定宽栏和一个自适应的栏并排展示存在</p>
-<p>实现思路也非常的简单：</p>
-<h4 id="浮动实现"><a href="#浮动实现" class="headerlink" title="浮动实现"></a>浮动实现</h4><ul>
-<li>使用 float 左浮左边栏</li>
-<li>右边模块使用 margin-left 撑出内容块做内容展示</li>
-<li>为父级元素添加BFC，防止下方元素飞到上方内容</li>
-</ul>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">&lt;style&gt;
-    .box</span><span class="token punctuation">{</span>
-        <span class="token property">overflow</span><span class="token punctuation">:</span> hidden<span class="token punctuation">;</span> &lt;!-- 生成BFC，计算高度时考虑浮动的元素 --&gt;
-    <span class="token punctuation">}</span>
-    <span class="token selector">.left</span> <span class="token punctuation">{</span>
-        <span class="token property">float</span><span class="token punctuation">:</span> left<span class="token punctuation">;</span>
-        <span class="token property">width</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
-        <span class="token property">background-color</span><span class="token punctuation">:</span> gray<span class="token punctuation">;</span>
-        <span class="token property">height</span><span class="token punctuation">:</span> 400px<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token selector">.right</span> <span class="token punctuation">{</span>
-        <span class="token property">margin-left</span><span class="token punctuation">:</span> 210px<span class="token punctuation">;</span>
-        <span class="token property">background-color</span><span class="token punctuation">:</span> lightgray<span class="token punctuation">;</span>
-        <span class="token property">height</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-&lt;/style&gt;
-&lt;div class=<span class="token string">"box"</span>&gt;
-    &lt;div class=<span class="token string">"left"</span>&gt;左边&lt;/div&gt;
-    &lt;div class=<span class="token string">"right"</span>&gt;右边&lt;/div&gt;
-&lt;/div&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="flex弹性布局"><a href="#flex弹性布局" class="headerlink" title="flex弹性布局"></a>flex弹性布局</h4><pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">&lt;style&gt;
-    .box</span><span class="token punctuation">{</span>
-        <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token selector">.left</span> <span class="token punctuation">{</span>
-        <span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token selector">.right</span> <span class="token punctuation">{</span>
-        <span class="token property">flex</span><span class="token punctuation">:</span> 1<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-&lt;/style&gt;
-&lt;div class=<span class="token string">"box"</span>&gt;
-    &lt;div class=<span class="token string">"left"</span>&gt;左边&lt;/div&gt;
-    &lt;div class=<span class="token string">"right"</span>&gt;右边&lt;/div&gt;
-&lt;/div&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><code>flex</code>可以说是最好的方案了，代码少，使用简单</p>
-<p>注意的是，<code>flex</code>容器的一个默认属性值:<code>align-items: stretch;</code></p>
-<p>这个属性导致了列等高的效果。 为了让两个盒子高度自动，需要设置: <code>align-items: flex-start</code></p>
-<h2 id="三、三栏布局"><a href="#三、三栏布局" class="headerlink" title="三、三栏布局"></a>三、三栏布局</h2><p>实现三栏布局中间自适应的布局方式有：</p>
+                <p>[toc]</p>
+<h1 id="TCP与UDP专题"><a href="#TCP与UDP专题" class="headerlink" title="TCP与UDP专题"></a>TCP与UDP专题</h1><h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><h3 id="1-1-计算机网络协议模型"><a href="#1-1-计算机网络协议模型" class="headerlink" title="1.1 计算机网络协议模型"></a>1.1 计算机网络协议模型</h3><p><img src="https://gitee.com/robertjeff/imagebed/raw/master/images/202110211939293.png" alt="四层与七层网络协议"></p>
+<p>其中TCP、UDP位于TCP/IP协议中的<code>传输层</code>：</p>
+<p>传输层的主要任务是为两台主机进程之间的通信提供服务，处理数据包错误、数据包次序，以及其他一些关键传输问题</p>
+<p>传输层向高层屏蔽了下层数据通信的细节。因此，它是计算机通信体系结构中关键的一层。</p>
+<h2 id="二、概念"><a href="#二、概念" class="headerlink" title="二、概念"></a>二、概念</h2><h3 id="2-1-UDP"><a href="#2-1-UDP" class="headerlink" title="2.1 UDP"></a>2.1 UDP</h3><p>UDP（User Datagram Protocol），用户数据包协议，是一个简单的<strong>面向数据报的通信协议</strong>，即对应用层交下来的报文，不合并，不拆分，只是在其上面加上首部后就交给了下面的网络层</p>
+<p>也就是说无论应用层交给<code>UDP</code>多长的报文，它统统发送，一次发送一个报文</p>
+<p>而对接收方，接到后直接去除首部，交给上面的应用层就完成任务</p>
+<p><code>UDP</code>报头包括4个字段，每个字段占用2个字节（即16个二进制位），标题短，开销小</p>
+<p><img src="https://gitee.com/robertjeff/imagebed/raw/master/images/202110211950752.png" alt="UDP报文"></p>
+<p>特点如下：</p>
 <ul>
-<li>两边使用 float，中间使用 margin</li>
-<li>两边使用 absolute，中间使用 margin</li>
-<li>display: table 实</li>
-<li>flex实现</li>
-<li>grid网格布局</li>
+<li>UDP 不提供复杂的控制机制，利用 IP 提供面向无连接的通信服务</li>
+<li>传输途中出现丢包，UDP 也不负责重发</li>
+<li>当包的到达顺序出现乱序时，UDP没有纠正的功能。</li>
+<li>并且它是将应用程序发来的数据在收到的那一刻，立即按照原样发送到网络上的一种机制。即使是出现网络拥堵的情况，UDP 也无法进行流量控制等避免网络拥塞行为</li>
 </ul>
-<h3 id="两边使用-float，中间使用-margin"><a href="#两边使用-float，中间使用-margin" class="headerlink" title="两边使用 float，中间使用 margin"></a>两边使用 float，中间使用 margin</h3><p>需要将中间的内容放在<code>html</code>结构最后，否则右侧会臣在中间内容的下方</p>
-<p>实现代码如下：</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">&lt;style&gt;
-    .wrap</span> <span class="token punctuation">{</span>
-        <span class="token property">background</span><span class="token punctuation">:</span> #eee<span class="token punctuation">;</span>
-        <span class="token property">overflow</span><span class="token punctuation">:</span> hidden<span class="token punctuation">;</span> &lt;!-- 生成BFC，计算高度时考虑浮动的元素 --&gt;
-        <span class="token property">padding</span><span class="token punctuation">:</span> 20px<span class="token punctuation">;</span>
-        <span class="token property">height</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token selector">.left</span> <span class="token punctuation">{</span>
-        <span class="token property">width</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
-        <span class="token property">height</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
-        <span class="token property">float</span><span class="token punctuation">:</span> left<span class="token punctuation">;</span>
-        <span class="token property">background</span><span class="token punctuation">:</span> coral<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token selector">.right</span> <span class="token punctuation">{</span>
-        <span class="token property">width</span><span class="token punctuation">:</span> 120px<span class="token punctuation">;</span>
-        <span class="token property">height</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
-        <span class="token property">float</span><span class="token punctuation">:</span> right<span class="token punctuation">;</span>
-        <span class="token property">background</span><span class="token punctuation">:</span> lightblue<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token selector">.middle</span> <span class="token punctuation">{</span>
-        <span class="token property">margin-left</span><span class="token punctuation">:</span> 220px<span class="token punctuation">;</span>
-        <span class="token property">height</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
-        <span class="token property">background</span><span class="token punctuation">:</span> lightpink<span class="token punctuation">;</span>
-        <span class="token property">margin-right</span><span class="token punctuation">:</span> 140px<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-&lt;/style&gt;
-&lt;div class=<span class="token string">"wrap"</span>&gt;
-    &lt;div class=<span class="token string">"left"</span>&gt;左侧&lt;/div&gt;
-    &lt;div class=<span class="token string">"right"</span>&gt;右侧&lt;/div&gt;
-    &lt;div class=<span class="token string">"middle"</span>&gt;中间&lt;/div&gt;
-&lt;/div&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>原理如下：</p>
+<h3 id="2-2-TCP"><a href="#2-2-TCP" class="headerlink" title="2.2 TCP"></a>2.2 TCP</h3><p>TCP（Transmission Control Protocol），传输控制协议，是一种可靠、<strong>面向字节流的通信协议</strong>，把上面应用层交下来的数据看成无结构的字节流来发送</p>
+<p>可以想象成流水形式的，发送方TCP会将数据放入“蓄水池”（缓存区），等到可以发送的时候就发送，不能发送就等着，TCP会根据当前网络的拥塞状态来确定每个报文段的大小</p>
+<p><code>TCP</code>报文首部有20个字节，额外开销大</p>
+<p><img src="https://gitee.com/robertjeff/imagebed/raw/master/images/202110211952277.png" alt="TCP报文"></p>
+<p>特点如下：</p>
 <ul>
-<li>两边固定宽度，中间宽度自适应。</li>
-<li>利用中间元素的margin值控制两边的间距</li>
-<li>宽度小于左右部分宽度之和时，右侧部分会被挤下去</li>
+<li>TCP充分地实现了数据传输时各种控制功能，可以进行丢包时的重发控制，还可以对次序乱掉的分包进行顺序控制。而这些在 UDP 中都没有。</li>
+<li>此外，TCP 作为一种面向有连接的协议，只有在确认通信对端存在时才会发送数据，从而可以控制通信流量的浪费。</li>
+<li>根据 TCP 的这些机制，在 IP 这种无连接的网络上也能够实现高可靠性的通信（ 主要通过检验和、序列号、确认应答、重发控制、连接管理以及窗口控制等机制实现）</li>
 </ul>
-<p>这种实现方式存在缺陷：</p>
+<h2 id="三、二者区别"><a href="#三、二者区别" class="headerlink" title="三、二者区别"></a>三、二者区别</h2><p>两者区别如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>TCP</th>
+<th>UDP</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>可靠性</td>
+<td>可靠</td>
+<td>不可靠</td>
+</tr>
+<tr>
+<td>连接性</td>
+<td>面向连接</td>
+<td>无连接</td>
+</tr>
+<tr>
+<td>报文</td>
+<td>面向字节流</td>
+<td>面向报文</td>
+</tr>
+<tr>
+<td>效率</td>
+<td>传输效率低</td>
+<td>传输效率高</td>
+</tr>
+<tr>
+<td>双共性</td>
+<td>全双工</td>
+<td>一对一、一对多、多对一、多对多</td>
+</tr>
+<tr>
+<td>流量控制</td>
+<td>滑动窗口</td>
+<td>无</td>
+</tr>
+<tr>
+<td>拥塞控制</td>
+<td>慢开始、拥塞避免、快重传、快恢复</td>
+<td>无</td>
+</tr>
+<tr>
+<td>传输效率</td>
+<td>慢</td>
+<td>快</td>
+</tr>
+</tbody></table>
 <ul>
-<li>主体内容是最后加载的。</li>
-<li>右边在主体内容之前，如果是响应式设计，不能简单的换行展示</li>
+<li>TCP 是面向连接的协议，建立连接3次握手、断开连接四次挥手，UDP是面向无连接，数据传输前后不连接连接，发送端只负责将数据发送到网络，接收端从消息队列读取</li>
+<li>TCP 提供可靠的服务，传输过程采用流量控制、编号与确认、计时器等手段确保数据无差错，不丢失。UDP 则尽可能传递数据，但不保证传递交付给对方</li>
+<li>TCP 面向字节流，将应用层报文看成一串无结构的字节流，分解为多个TCP报文段传输后，在目的站重新装配。UDP协议面向报文，不拆分应用层报文，只保留报文边界，一次发送一个报文，接收方去除报文首部后，原封不动将报文交给上层应用</li>
+<li>TCP 只能点对点全双工通信。UDP 支持一对一、一对多、多对一和多对多的交互通信</li>
 </ul>
-<h3 id="两边使用-absolute，中间使用-margin"><a href="#两边使用-absolute，中间使用-margin" class="headerlink" title="两边使用 absolute，中间使用 margin"></a>两边使用 absolute，中间使用 margin</h3><p>基于绝对定位的三栏布局：注意绝对定位的元素脱离文档流，相对于最近的已经定位的祖先元素进行定位。无需考虑HTML中结构的顺序</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">&lt;style&gt;
-  .container</span> <span class="token punctuation">{</span>
-    <span class="token property">position</span><span class="token punctuation">:</span> relative<span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-  
-  <span class="token selector">.left,
-  .right,
-  .main</span> <span class="token punctuation">{</span>
-    <span class="token property">height</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
-    <span class="token property">line-height</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
-    <span class="token property">text-align</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-
-  <span class="token selector">.left</span> <span class="token punctuation">{</span>
-    <span class="token property">position</span><span class="token punctuation">:</span> absolute<span class="token punctuation">;</span>
-    <span class="token property">top</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
-    <span class="token property">left</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
-    <span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
-    <span class="token property">background</span><span class="token punctuation">:</span> green<span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-
-  <span class="token selector">.right</span> <span class="token punctuation">{</span>
-    <span class="token property">position</span><span class="token punctuation">:</span> absolute<span class="token punctuation">;</span>
-    <span class="token property">top</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
-    <span class="token property">right</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
-    <span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
-    <span class="token property">background</span><span class="token punctuation">:</span> green<span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-
-  <span class="token selector">.main</span> <span class="token punctuation">{</span>
-    <span class="token property">margin</span><span class="token punctuation">:</span> 0 110px<span class="token punctuation">;</span>
-    <span class="token property">background</span><span class="token punctuation">:</span> black<span class="token punctuation">;</span>
-    <span class="token property">color</span><span class="token punctuation">:</span> white<span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-&lt;/style&gt;
-
-&lt;div class=<span class="token string">"container"</span>&gt;
-  &lt;div class=<span class="token string">"left"</span>&gt;左边固定宽度&lt;/div&gt;
-  &lt;div class=<span class="token string">"right"</span>&gt;右边固定宽度&lt;/div&gt;
-  &lt;div class=<span class="token string">"main"</span>&gt;中间自适应&lt;/div&gt;
-&lt;/div&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>实现流程：</p>
+<p>两者应用场景如下图：</p>
+<p><img src="https://gitee.com/robertjeff/imagebed/raw/master/images/202110211954693.png" alt="应用场景"></p>
+<p><strong>TCP应用场景：</strong> 效率要求相对低，但对准确性要求相对高的场景。因为传输中需要对数据确认、重发、排序等操作，相比之下效率没有UDP高。例如：文件传输（准确高要求高、但是速度可以相对慢）、接受邮件、远程登录。</p>
+<p><strong>UDP应用场景：</strong> 效率要求相对高，对准确性要求相对低的场景。例如：QQ聊天、在线视频、网络语音电话（即时通讯，速度要求高，但是出现偶尔断续不是太大问题，并且此处完全不可以使用重发机制）、广播通信（广播、多播）。</p>
+<h2 id="四、TCP三次握手与四次挥手"><a href="#四、TCP三次握手与四次挥手" class="headerlink" title="四、TCP三次握手与四次挥手"></a>四、TCP三次握手与四次挥手</h2><h3 id="4-1-三次握手"><a href="#4-1-三次握手" class="headerlink" title="4.1 三次握手"></a>4.1 三次握手</h3><p><img src="https://gitee.com/robertjeff/imagebed/raw/master/images/202110212024357.webp" alt="用三报文握手建立TCP连接"></p>
+<p>三次握手（Three-way Handshake）其实就是指建立一个TCP连接时，需要客户端和服务器总共发送3个包。进行三次握手的主要作用就是为了确认双方的接收能力和发送能力是否正常、指定自己的初始化序列号为后面的可靠性传送做准备。实质上其实就是连接服务器指定端口，建立TCP连接，并同步连接双方的序列号和确认号，交换TCP窗口大小信息。</p>
+<p>过程如下：</p>
 <ul>
-<li>左右两边使用绝对定位，固定在两侧。</li>
-<li>中间占满一行，但通过 margin和左右两边留出10px的间隔</li>
+<li>第一次握手：客户端给服务端发一个 SYN 报文，并指明客户端的初始化序列号 ISN(c)，此时客户端处于 SYN_SENT 状态</li>
+<li>第二次握手：服务器收到客户端的 SYN 报文之后，会以自己的 SYN 报文作为应答，为了确认客户端的 SYN，将客户端的 ISN+1作为ACK的值，此时服务器处于 SYN_RCVD 的状态</li>
+<li>第三次握手：客户端收到 SYN 报文之后，会发送一个 ACK 报文，值为服务器的ISN+1。此时客户端处于 ESTABLISHED 状态。服务器收到 ACK 报文之后，也处于 ESTABLISHED 状态，此时，双方已建立起了连接。</li>
 </ul>
-<h3 id="使用-display-table-实现"><a href="#使用-display-table-实现" class="headerlink" title="使用 display: table 实现"></a>使用 display: table 实现</h3><pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">&lt;style&gt;
-  .container</span> <span class="token punctuation">{</span>
-    <span class="token property">height</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
-    <span class="token property">line-height</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
-    <span class="token property">text-align</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
-    <span class="token property">display</span><span class="token punctuation">:</span> table<span class="token punctuation">;</span>
-    <span class="token property">table-layout</span><span class="token punctuation">:</span> fixed<span class="token punctuation">;</span>
-    <span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-
-  <span class="token selector">.left,
-  .right,
-  .main</span> <span class="token punctuation">{</span>
-    <span class="token property">display</span><span class="token punctuation">:</span> table-cell<span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-
-  <span class="token selector">.left,
-  .right</span> <span class="token punctuation">{</span>
-    <span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
-    <span class="token property">background</span><span class="token punctuation">:</span> green<span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-
-  <span class="token selector">.main</span> <span class="token punctuation">{</span>
-    <span class="token property">background</span><span class="token punctuation">:</span> black<span class="token punctuation">;</span>
-    <span class="token property">color</span><span class="token punctuation">:</span> white<span class="token punctuation">;</span>
-    <span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-&lt;/style&gt;
-
-&lt;div class=<span class="token string">"container"</span>&gt;
-  &lt;div class=<span class="token string">"left"</span>&gt;左边固定宽度&lt;/div&gt;
-  &lt;div class=<span class="token string">"main"</span>&gt;中间自适应&lt;/div&gt;
-  &lt;div class=<span class="token string">"right"</span>&gt;右边固定宽度&lt;/div&gt;
-&lt;/div&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>实现原理：</p><ul>
-<li>外层通过 <code>display: table</code>设置为表格，设置 <code>table-layout: fixed</code>表示列宽自身宽度决定，而不是自动计算。</li>
-<li>内层的左中右通过 display: table-cell设置为表格单元。</li>
-<li>左右设置固定宽度，中间设置 width: 100% 填充剩下的宽度</li>
-</ul><h3 id="使用flex实现"><a href="#使用flex实现" class="headerlink" title="使用flex实现"></a>使用flex实现</h3><pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">&lt;style type="text/css"&gt;
-    .wrap</span> <span class="token punctuation">{</span>
-        <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
-        <span class="token property">justify-content</span><span class="token punctuation">:</span> space-between<span class="token punctuation">;</span>&lt;--定义了子元素在主轴<span class="token punctuation">(</span>横轴<span class="token punctuation">)</span>上的对齐方式
-    <span class="token punctuation">}</span>
-
-    <span class="token selector">.left,
-    .right,
-    .middle</span> <span class="token punctuation">{</span>
-        <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token selector">.left</span> <span class="token punctuation">{</span>
-        <span class="token property">width</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
-        <span class="token property">background</span><span class="token punctuation">:</span> coral<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token selector">.right</span> <span class="token punctuation">{</span>
-        <span class="token property">width</span><span class="token punctuation">:</span> 120px<span class="token punctuation">;</span>
-        <span class="token property">background</span><span class="token punctuation">:</span> lightblue<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token selector">.middle</span> <span class="token punctuation">{</span>
-        <span class="token property">background</span><span class="token punctuation">:</span> #555<span class="token punctuation">;</span>
-        <span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
-        <span class="token property">margin</span><span class="token punctuation">:</span> 0 20px<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-&lt;/style&gt;
-&lt;div class=<span class="token string">"wrap"</span>&gt;
-    &lt;div class=<span class="token string">"left"</span>&gt;左侧&lt;/div&gt;
-    &lt;div class=<span class="token string">"middle"</span>&gt;中间&lt;/div&gt;
-    &lt;div class=<span class="token string">"right"</span>&gt;右侧&lt;/div&gt;
-&lt;/div&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>实现过程：</p><ul>
-<li>仅需将容器设置为<code>display:flex;</code>，</li>
-<li>盒内元素两端对其，将中间元素设置为<code>100%</code>宽度，或者设为<code>flex:1</code>，即可填充空白</li>
-<li>盒内元素的高度撑开容器的高度</li>
-</ul><p>优点：</p><ul>
-<li>结构简单直观</li>
-<li>可以结合 flex的其他功能实现更多效果，例如使用 order属性调整显示顺序，让主体内容优先加载，但展示在中间</li>
-</ul><h3 id="grid网格布局"><a href="#grid网格布局" class="headerlink" title="grid网格布局"></a>grid网格布局</h3><pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">&lt;style&gt;
-    .wrap</span> <span class="token punctuation">{</span>
-        <span class="token property">display</span><span class="token punctuation">:</span> grid<span class="token punctuation">;</span>
-        <span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
-        <span class="token property">grid-template-columns</span><span class="token punctuation">:</span> 300px auto 300px<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token selector">.left,
-    .right,
-    .middle</span> <span class="token punctuation">{</span>
-        <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token selector">.left</span> <span class="token punctuation">{</span>
-        <span class="token property">background</span><span class="token punctuation">:</span> coral<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token selector">.right</span> <span class="token punctuation">{</span>
-        <span class="token property">width</span><span class="token punctuation">:</span> 300px<span class="token punctuation">;</span>
-        <span class="token property">background</span><span class="token punctuation">:</span> lightblue<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token selector">.middle</span> <span class="token punctuation">{</span>
-        <span class="token property">background</span><span class="token punctuation">:</span> #555<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-&lt;/style&gt;
-&lt;div class=<span class="token string">"wrap"</span>&gt;
-    &lt;div class=<span class="token string">"left"</span>&gt;左侧&lt;/div&gt;
-    &lt;div class=<span class="token string">"middle"</span>&gt;中间&lt;/div&gt;
-    &lt;div class=<span class="token string">"right"</span>&gt;右侧&lt;/div&gt;
-&lt;/div&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><table>
-
-
-
-
-
-
-
-
-
-
-
-</table> 标签用于展示行列数据，不适合用于布局。但是可以使用 display: table 来实现布局的效果
-
+<p>上述每一次握手的作用如下：</p>
+<ul>
+<li>第一次握手：客户端发送网络包，服务端收到了 这样服务端就能得出结论：客户端的发送能力、服务端的接收能力是正常的。</li>
+<li>第二次握手：服务端发包，客户端收到了 这样客户端就能得出结论：服务端的接收、发送能力，客户端的接收、发送能力是正常的。不过此时服务器并不能确认客户端的接收能力是否正常</li>
+<li>第三次握手：客户端发包，服务端收到了。 这样服务端就能得出结论：客户端的接收、发送能力正常，服务器自己的发送、接收能力也正常</li>
+</ul>
+<p>通过三次握手，就能确定双方的接收和发送能力是正常的。之后就可以正常通信了</p>
+<h5 id="为什么要三次握手呢？两次不行吗？"><a href="#为什么要三次握手呢？两次不行吗？" class="headerlink" title="为什么要三次握手呢？两次不行吗？"></a><strong>为什么要三次握手呢？两次不行吗？</strong></h5><ul>
+<li><p>为了确认双方的接收能力和发送能力都正常</p>
+</li>
+<li><p>如果是两次握手，发送端可以确定自己发送的信息能对方能收到，也能确定对方发的包自己能收到，但接收端只能确定对方发的包自己能收到 无法确定自己发的包对方能收到</p>
+</li>
+<li><p>并且两次握手的话, 客户端有可能因为网络阻塞等原因会发送多个请求报文，延时到达的请求又会与服务器建立连接，浪费掉许多服务器的资源</p>
+</li>
+</ul>
+<h3 id="4-2-四次挥手"><a href="#4-2-四次挥手" class="headerlink" title="4.2 四次挥手"></a>4.2 四次挥手</h3><p><code>tcp</code>终止一个连接，需要经过四次挥手</p>
+<p><img src="https://gitee.com/robertjeff/imagebed/raw/master/images/202110212035432.webp" alt="四次挥手"></p>
+<p>过程如下：</p>
+<ul>
+<li>第一次挥手：客户端发送一个 FIN 报文，报文中会指定一个序列号。此时客户端处于 FIN_WAIT1 状态，停止发送数据，等待服务端的确认</li>
+<li>第二次挥手：服务端收到 FIN 之后，会发送 ACK 报文，且把客户端的序列号值 +1 作为 ACK 报文的序列号值，表明已经收到客户端的报文了，此时服务端处于 CLOSE_WAIT状态</li>
+<li>第三次挥手：如果服务端也想断开连接了，和客户端的第一次挥手一样，发给 FIN 报文，且指定一个序列号。此时服务端处于 <code>LAST_ACK</code> 的状态</li>
+<li>第四次挥手：客户端收到 FIN 之后，一样发送一个 ACK 报文作为应答，且把服务端的序列号值 +1 作为自己 ACK 报文的序列号值，此时客户端处于 TIME_WAIT状态。需要过一阵子以确保服务端收到自己的 ACK 报文之后才会进入 CLOSED 状态，服务端收到 ACK 报文之后，就处于关闭连接了，处于 CLOSED 状态</li>
+</ul>
+<h5 id="那为什么需要四次挥手呢？"><a href="#那为什么需要四次挥手呢？" class="headerlink" title="那为什么需要四次挥手呢？"></a><strong>那为什么需要四次挥手呢？</strong></h5><p>服务端在收到客户端断开连接<code>Fin</code>报文后，并不会立即关闭连接，而是先发送一个<code>ACK</code>包先告诉客户端收到关闭连接的请求，只有当服务器的所有报文发送完毕之后，才发送<code>FIN</code>报文断开连接，因此需要四次挥手。</p>
+<h5 id="等待2MSL的意义，如果不等待会怎样？"><a href="#等待2MSL的意义，如果不等待会怎样？" class="headerlink" title="等待2MSL的意义，如果不等待会怎样？"></a><strong>等待2MSL的意义</strong>，如果不等待会怎样？</h5><p>如果不等待，客户端直接跑路，当服务端还有很多数据包要给客户端发，且还在路上的时候，若客户端的端口此时刚好被新的应用占用，那么就接收到了无用数据包，造成数据包混乱。所以，最保险的做法是等服务器发来的数据包都死翘翘再启动新的应用。</p>
+<p>那，照这样说一个 MSL 不就不够了吗，为什么要等待 2 MSL?</p>
+<ul>
+<li>1 个 MSL 确保四次挥手中主动关闭方最后的 ACK 报文最终能达到对端</li>
+<li>1 个 MSL 确保对端没有收到 ACK 重传的 FIN 报文可以到达</li>
+</ul>
+<p>这就是等待 2MSL 的意义。</p>
+<h5 id="2MSL是多久？"><a href="#2MSL是多久？" class="headerlink" title="2MSL是多久？"></a>2MSL是多久？</h5><p>规范里2MSL是四分钟。</p>
 
                 
             </div>
@@ -993,7 +845,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://robertjeff2.github.io/posts/bfdfcbd4.html">https://robertjeff2.github.io/posts/bfdfcbd4.html</a>
+                    <a href="https://robertjeff2.github.io/posts/27732848.html">https://robertjeff2.github.io/posts/27732848.html</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1031,8 +883,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/CSS/">
-                                    <span class="chip bg-color">CSS</span>
+                                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                                    <span class="chip bg-color">计算机网络</span>
                                 </a>
                             
                         </div>
@@ -1504,9 +1356,10 @@ new Valine({
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/posts/27732848.html">
                     <div class="card-image">
@@ -1524,9 +1377,9 @@ new Valine({
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-10-21
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-21
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -1535,6 +1388,7 @@ new Valine({
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -1553,13 +1407,13 @@ new Valine({
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/posts/404ade06.html">
+                <a href="/posts/bfdfcbd4.html">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928013834.jpg" class="responsive-img" alt="CSS之盒子模型与BFC">
+                        <img src="https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928020319.jpg" class="responsive-img" alt="CSS之两栏三栏布局">
                         
-                        <span class="card-title">CSS之盒子模型与BFC</span>
+                        <span class="card-title">CSS之两栏三栏布局</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
