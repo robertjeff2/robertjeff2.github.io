@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://robertjeff2.github.io/posts/1e82aa9b.html</loc>
+    
+    <lastmod>2021-10-22</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://robertjeff2.github.io/posts/27732848.html</loc>
     
     <lastmod>2021-10-21</lastmod>
@@ -235,7 +242,7 @@
 
   <url>
     <loc>https://robertjeff2.github.io/</loc>
-    <lastmod>2021-10-21</lastmod>
+    <lastmod>2021-10-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -243,28 +250,35 @@
   
   <url>
     <loc>https://robertjeff2.github.io/tags/JS/</loc>
-    <lastmod>2021-10-21</lastmod>
+    <lastmod>2021-10-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://robertjeff2.github.io/tags/vue3/</loc>
-    <lastmod>2021-10-21</lastmod>
+    <lastmod>2021-10-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://robertjeff2.github.io/tags/CSS/</loc>
-    <lastmod>2021-10-21</lastmod>
+    <lastmod>2021-10-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://robertjeff2.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</loc>
-    <lastmod>2021-10-21</lastmod>
+    <lastmod>2021-10-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://robertjeff2.github.io/tags/JavaScript/</loc>
+    <lastmod>2021-10-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
