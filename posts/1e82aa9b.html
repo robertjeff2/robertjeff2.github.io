@@ -659,7 +659,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-10-22
+                    2021-10-25
                 </div>
                 
 
@@ -966,7 +966,8 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <li>some()：对数组每一项都运行传入的函数，如果有一项函数返回 true，则这个方法返回 true。</li>
 </ul>
 <p>这些方法都不改变调用它们的数组。</p>
-<h4 id="every-和some"><a href="#every-和some" class="headerlink" title="every()和some()"></a>every()和some()</h4><p>every()和 some()是最相似的，都是从数组中搜索符合某个条件的元素。对 every()来说，传入的函数必须对每一项都返回 true，它才会返回 true；否则，它就返回 false。而对 some()来说，只要有一项让传入的函数返回 true，它就会返回 true。下面是一个例子：</p>
+<h4 id="every-和some"><a href="#every-和some" class="headerlink" title="every()和some()"></a>every()和some()</h4><p><strong>注意</strong>：若收到一个空数组，这两个在一切情况下都会返回 <code>true</code>。</p>
+<p>every()和 some()是最相似的，都是从数组中搜索符合某个条件的元素。对 every()来说，传入的函数必须对每一项都返回 true，它才会返回 true；否则，它就返回 false。而对 some()来说，只要有一项让传入的函数返回 true，它就会返回 true。下面是一个例子：</p>
 <pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">let</span> numbers <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token keyword">let</span> everyResult <span class="token operator">=</span> numbers<span class="token punctuation">.</span><span class="token function">every</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">item<span class="token punctuation">,</span> index<span class="token punctuation">,</span> array</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> item <span class="token operator">&gt;</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>everyResult<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// false</span>
@@ -2046,7 +2047,7 @@ new Valine({
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">19.3k</span>&nbsp;字
+                class="white-color">20k</span>&nbsp;字
             
             
             

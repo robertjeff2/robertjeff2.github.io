@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="JavaScript中的this, 计算机 前端">
+    <meta name="keywords" content="JavaScript之防抖和节流, 计算机 前端">
     <meta name="description" content="本科 | 计算机科学与技术">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>JavaScript中的this | Jeff</title>
+    <title>JavaScript之防抖和节流 | Jeff</title>
 
     <link rel="icon" type="image/jpeg" href="https://s1.ax1x.com/2020/05/17/YR20js.jpg">
 
@@ -510,12 +510,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928015537.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928013251.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">JavaScript中的this</h1>
+                    <h1 class="description center-align post-title">JavaScript之防抖和节流</h1>
                 </div>
             </div>
         </div>
@@ -636,8 +636,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/JS/">
-                                <span class="chip bg-color">JS</span>
+                            <a href="/tags/JavaScript/">
+                                <span class="chip bg-color">JavaScript</span>
                             </a>
                         
                     </div>
@@ -652,28 +652,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-10-18
+                    2021-10-25
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-10-18
+                    2021-10-25
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.9k
+                    636
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    7 分
+                    2 分
                 </div>
                 
 
@@ -691,186 +691,61 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="问：如何判断this的指向？"><a href="#问：如何判断this的指向？" class="headerlink" title="问：如何判断this的指向？"></a>问：如何判断this的指向？</h3><ul>
-<li>在全局环境中调用就指向 window。</li>
-<li>作为对象的方法调用就指向该对象。</li>
-<li>作为构造函数调用就指向这个新创建的对象。</li>
-<li>可以使用 apply,call,bind 改变 this 指向。</li>
-<li>箭头函数中的 this 与定义时所处的上下文绑定，且不能被改变，   箭头函数 this 指向取决于它外层找到的离它最近的第一个非箭头函数的 this。</li>
+                <h1 id="函数防抖和节流"><a href="#函数防抖和节流" class="headerlink" title="函数防抖和节流"></a>函数防抖和节流</h1><h2 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h2><p>本质上是优化高频率执行代码的一种手段</p>
+<p>如：浏览器的 <code>resize</code>、<code>scroll</code>、<code>keypress</code>、<code>mousemove</code> 等事件在触发时，会不断地调用绑定在事件上的回调函数，极大地浪费资源，降低前端性能</p>
+<p>为了优化体验，需要对这类事件进行调用次数的限制，对此我们就可以采用<code>throttle</code>（节流）和<code>debounce</code>（防抖）的方式来减少调用频率</p>
+<h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><ul>
+<li>节流: n 秒内只运行一次，若在 n 秒内重复触发，只有一次生效</li>
+<li>防抖: n 秒后在执行该事件，若在 n 秒内被重复触发，则重新计时</li>
 </ul>
-<h2 id="一、定义"><a href="#一、定义" class="headerlink" title="一、定义"></a>一、定义</h2><p>函数的 <code>this</code> 关键字在 <code>JavaScript</code> 中的表现略有不同，此外，在严格模式和非严格模式之间也会有一些差别</p>
-<p><strong>无论是否在严格模式下，在全局执行环境中(任何函数体外部)<code>this</code>都指向全局对象</strong></p>
-<p>在绝大多数情况下，函数的调用方式决定了 <code>this</code> 的值（运行时绑定）</p>
-<p><code>this</code> 关键字是函数运行时自动生成的一个内部对象，只能在函数内部使用，总指向调用它的对象</p>
-<p>example：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">baz</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// 当前调用栈是：baz</span>
-    <span class="token comment">// 因此，当前调用位置是全局作用域</span>
-    
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span> <span class="token string">"baz"</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// &lt;-- bar的调用位置</span>
+<h2 id="二、防抖"><a href="#二、防抖" class="headerlink" title="二、防抖"></a>二、防抖</h2><p>每次事件触发后总是等待一段时间执行，如果在等待时间内事件再次触发，则重新计算等待时间（停止触发的时候只会执行一次,最后一次生效）</p>
+<p><img src="https://gitee.com/robertjeff/imagebed/raw/master/images/202110251110697.webp" alt="防抖"></p>
+<p>这里模拟一个输入框，当连续输入多个字符时，只有等待了足够的timer才执行log操作。</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"text"</span> name<span class="token operator">=</span><span class="token string">""</span> value<span class="token operator">=</span><span class="token string">""</span><span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span>script type<span class="token operator">=</span><span class="token string">"text/javascript"</span><span class="token operator">&gt;</span>
+    <span class="token keyword">let</span> el <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'input'</span><span class="token punctuation">)</span>
+    el<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">"input"</span><span class="token punctuation">,</span> <span class="token function">debounce</span><span class="token punctuation">(</span><span class="token constant">A</span><span class="token punctuation">,</span> <span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">function</span> <span class="token function">debounce</span><span class="token punctuation">(</span><span class="token parameter">fn<span class="token punctuation">,</span> delay</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">let</span> timer <span class="token operator">=</span> <span class="token keyword">null</span>
+        <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            timer <span class="token operator">&amp;&amp;</span> <span class="token function">clearTimeout</span><span class="token punctuation">(</span>timer<span class="token punctuation">)</span>
+            timer <span class="token operator">=</span> <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+                <span class="token function">fn</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span> delay<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">function</span> <span class="token constant">A</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>value<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://gitee.com/robertjeff/imagebed/raw/master/images/202110251121378.png" alt="实现效果"></p>
+<h2 id="三、节流"><a href="#三、节流" class="headerlink" title="三、节流"></a>三、节流</h2><p>每次事件触发后总是等待一段时间执行，如果在等待时间内事件再次触发（事件触发时有其他事件在等待），则不作处理。如果事件触发时没有其他事件在等待，则将事件进行绑定（等待时间到则进行事件执行）多次触发事件时只有一次生效，对应时间内只执行一次，第一次生效。</p>
+<p><img src="https://gitee.com/robertjeff/imagebed/raw/master/images/202110251125831.webp" alt="节流"></p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">throttle</span><span class="token punctuation">(</span><span class="token parameter">fn<span class="token punctuation">,</span>time<span class="token operator">=</span><span class="token number">1000</span></span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">let</span> canRun<span class="token operator">=</span><span class="token boolean">true</span><span class="token punctuation">;</span><span class="token comment">//阀门打开</span>
+    <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>canRun<span class="token punctuation">)</span><span class="token keyword">return</span> <span class="token boolean">false</span>
+        canRun<span class="token operator">=</span><span class="token boolean">false</span><span class="token comment">//使用定时器 关闭阀门</span>
+        <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+            <span class="token function">fn</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+            canRun<span class="token operator">=</span><span class="token boolean">true</span><span class="token comment">//执行完毕开启阀门</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>time<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
+<span class="token function">setInterval</span><span class="token punctuation">(</span><span class="token function">throttle</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"hello world"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<span class="token keyword">function</span> <span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// 当前调用栈是：baz --&gt; bar</span>
-    <span class="token comment">// 因此，当前调用位置在baz中</span>
-    
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span> <span class="token string">"bar"</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// &lt;-- foo的调用位置</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// 当前调用栈是：baz --&gt; bar --&gt; foo</span>
-    <span class="token comment">// 因此，当前调用位置在bar中</span>
-    
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span> <span class="token string">"foo"</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token function">baz</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// &lt;-- baz的调用位置</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><code>this</code> 在函数执行过程中，<code>this</code> 一旦被确定了，就不可以再更改</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
-<span class="token keyword">var</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
-  a<span class="token operator">:</span> <span class="token number">20</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">function</span> <span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">this</span> <span class="token operator">=</span> obj<span class="token punctuation">;</span> <span class="token comment">// 修改this，运行后会报错</span>
-  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="this在类中"><a href="#this在类中" class="headerlink" title="this在类中"></a>this在类中</h4><p><code>this</code>在类中的表现与在函数中类似，因为类本质上也是函数。</p>
-<p>在类的构造函数中，<code>this</code> 是一个常规对象。类中所有非静态的方法都会被添加到 <code>this</code> 的原型中：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">Example</span> <span class="token punctuation">{</span>
-  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">const</span> proto <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">getPrototypeOf</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>Object<span class="token punctuation">.</span><span class="token function">getOwnPropertyNames</span><span class="token punctuation">(</span>proto<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-  <span class="token function">first</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
-  <span class="token function">second</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
-  <span class="token keyword">static</span> <span class="token function">third</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">new</span> <span class="token class-name">Example</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// ['constructor', 'first', 'second']</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="二、具体情况分析"><a href="#二、具体情况分析" class="headerlink" title="二、具体情况分析"></a>二、具体情况分析</h2><h3 id="apply、call方法"><a href="#apply、call方法" class="headerlink" title="apply、call方法"></a>apply、call方法</h3><p>在非严格模式下使用<code>call</code>和<code>apply</code>时，如果用做this值不是对象，则会被尝试转换为对象。</p>
-<p><code>null</code>和 <code>undefined</code>会被转换为全局对象</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token function">bar</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">// [object Number]</span>
-<span class="token function">bar</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token string">'foo'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [object String]</span>
-<span class="token function">bar</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">undefined</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [object global]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="bind方法"><a href="#bind方法" class="headerlink" title="bind方法"></a>bind方法</h3><p>ECMAScript 5 引入了 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/bind"><code>Function.prototype.bind()</code></a>。调用 <code>f.bind(someObject)</code> 会创建一个与 <code>f</code> 具有相同函数体和作用域的函数，但是在这个新函数中，<code>this</code> 将永久地被绑定到了 <code>bind</code> 的第一个参数，无论这个函数是如何被调用的。</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-  <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">var</span> g <span class="token operator">=</span> <span class="token function">f</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token punctuation">{</span>a<span class="token operator">:</span><span class="token string">"azerty"</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">g</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// azerty</span>
-
-<span class="token keyword">var</span> h <span class="token operator">=</span> <span class="token function">g</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token punctuation">{</span>a<span class="token operator">:</span><span class="token string">'yoo'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// bind只生效一次！</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">h</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// azerty</span>
-
-<span class="token keyword">var</span> o <span class="token operator">=</span> <span class="token punctuation">{</span>a<span class="token operator">:</span><span class="token number">37</span><span class="token punctuation">,</span> f<span class="token operator">:</span>f<span class="token punctuation">,</span> g<span class="token operator">:</span>g<span class="token punctuation">,</span> h<span class="token operator">:</span>h<span class="token punctuation">}</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>o<span class="token punctuation">.</span>a<span class="token punctuation">,</span> o<span class="token punctuation">.</span><span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> o<span class="token punctuation">.</span><span class="token function">g</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> o<span class="token punctuation">.</span><span class="token function">h</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 37, 37, azerty, azerty</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h3><p>在箭头函数中，<code>this</code> 与封闭词法环境的 <code>this</code> 保持一致。在全局代码中，它将被设置为全局对象：</p>
-<p><strong>注意：如果将 <code>this</code> 传递给 <code>call</code>、<code>bind</code>、或者 <code>apply</code> 来调用箭头函数，它将被忽略。不过你仍然可以为调用添加参数，不过第一个参数（<code>thisArg</code>）应该设置为 <code>null</code>。</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">// 创建一个含有bar方法的obj对象，
-// bar返回一个函数，
-// 这个函数返回this，
-// 这个返回的函数是以箭头函数创建的，
-// 所以它的this被永久绑定到了它外层函数的this。
-// bar的值可以在调用中设置，这反过来又设置了返回函数的值。
-var obj = {
-  bar: function() {
-    var x = (() =&gt; this);
-    return x;
-  }
-};
-
-// 作为obj对象的一个方法来调用bar，把它的this绑定到obj。
-// 将返回的函数的引用赋值给fn。
-var fn = obj.bar();
-
-// 直接调用fn而不设置this，
-// 通常(即不使用箭头函数的情况)默认为全局对象
-// 若在严格模式则为undefined
-console.log(fn() === obj); // true
-
-// 但是注意，如果你只是引用obj的方法，
-// 而没有调用它
-var fn2 = obj.bar;
-// 那么调用箭头函数后，this指向window，因为它从 bar 继承了this。
-console.log(fn2()() == window); // true<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>在上面的例子中，一个赋值给了 <code>obj.bar</code> 的函数（称为匿名函数 A），返回了另一个箭头函数（称为匿名函数 B）。因此，在 <code>A</code> 调用时，函数 B 的 <code>this</code> 被永久设置为 obj.bar（函数 A）的 <code>this</code>。当返回的函数（函数 B）被调用时，它 <code>this</code> 始终是最初设置的。在上面的代码示例中，函数 B 的 <code>this</code> 被设置为函数 A 的 <code>this</code>，即 obj，所以即使被调用的方式通常将其设置为 <code>undefined</code> 或全局对象（或者如前面示例中的其他全局执行环境中的方法），它的 <code>this</code> 也仍然是 <code>obj</code> 。</p>
-<h3 id="作为对象的方法"><a href="#作为对象的方法" class="headerlink" title="作为对象的方法"></a>作为对象的方法</h3><p>当函数作为对象里的方法被调用时，<code>this</code> 被设置为调用该函数的对象。</p>
-<p>下面的例子中，当 <code>o.f()</code> 被调用时，函数内的 <code>this</code> 将绑定到 <code>o</code> 对象。</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> o <span class="token operator">=</span> <span class="token punctuation">{</span>
-  prop<span class="token operator">:</span> <span class="token number">37</span><span class="token punctuation">,</span>
-  <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>prop<span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>o<span class="token punctuation">.</span><span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 37</span>
-<span class="token comment">//可以理解为 o.f().call(o)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="原型链中的this"><a href="#原型链中的this" class="headerlink" title="原型链中的this"></a>原型链中的this</h3><p>对于在对象原型链上某处定义的方法，同样的概念也适用。如果该方法存在于一个对象的原型链上，那么 <code>this</code> 指向的是调用这个方法的对象，就像该方法就在这个对象上一样。</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> o <span class="token operator">=</span> <span class="token punctuation">{</span>
-  <span class="token function-variable function">f</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>a <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>b<span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token keyword">var</span> p <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span><span class="token punctuation">;</span>
-p<span class="token punctuation">.</span>a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-p<span class="token punctuation">.</span>b <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">;</span>
-
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>p<span class="token punctuation">.</span><span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 5</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>在这个例子中，对象 <code>p</code> 没有属于它自己的 <code>f</code> 属性，它的 <code>f</code> 属性继承自它的原型。虽然最终是在 <code>o</code> 中找到 <code>f</code> 属性的，这并没有关系；查找过程首先从 <code>p.f</code> 的引用开始，所以函数中的 <code>this</code> 指向 <code>p</code>。也就是说，因为 <code>f</code> 是作为 <code>p</code> 的方法调用的，所以它的 <code>this</code> 指向了 <code>p</code>。这是 JavaScript 的原型继承中的一个有趣的特性。</p>
-<h3 id="构造函数中"><a href="#构造函数中" class="headerlink" title="构造函数中"></a>构造函数中</h3><p>当一个函数用作构造函数时（使用 <code>new</code>关键字），它的 <code>this</code> 被绑定到正在构造的新对象。</p>
-<p><em>虽然构造函数返回的默认值是 <code>this</code> 所指的那个对象，但它仍可以手动返回其他的对象（如果返回值不是一个对象，则返回 <code>this</code> 对象）。</em></p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">/*
- * 构造函数这样工作:
- *
- * function MyConstructor(){
- *   // 函数实体写在这里
- *   // 根据需要在this上创建属性，然后赋值给它们，比如：
- *   this.fum = "nom";
- *   // 等等...
- *
- *   // 如果函数具有返回对象的return语句，
- *   // 则该对象将是 new 表达式的结果。
- *   // 否则，表达式的结果是当前绑定到 this 的对象。
- *   //（即通常看到的常见情况）。
- * }
- */</span>
-
-<span class="token keyword">function</span> <span class="token constant">C</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-  <span class="token keyword">this</span><span class="token punctuation">.</span>a <span class="token operator">=</span> <span class="token number">37</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">var</span> o <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">C</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>o<span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// logs 37</span>
-
-
-<span class="token keyword">function</span> <span class="token constant">C2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-  <span class="token keyword">this</span><span class="token punctuation">.</span>a <span class="token operator">=</span> <span class="token number">37</span><span class="token punctuation">;</span>
-  <span class="token keyword">return</span> <span class="token punctuation">{</span>a<span class="token operator">:</span><span class="token number">38</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-o <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">C2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>o<span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// logs 38</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>在刚刚的例子中（<code>C2</code>），因为在调用构造函数的过程中，手动的设置了返回对象，与 <code>this</code> 绑定的默认对象被丢弃了。（这基本上使得语句 “<code>this.a = 37;</code>” 成了 “僵尸” 代码，实际上并不是真正的 “僵尸”，这条语句执行了，但是对于外部没有任何影响，因此完全可以忽略它）。</p>
-<h3 id="DOM事件处理函数"><a href="#DOM事件处理函数" class="headerlink" title="DOM事件处理函数"></a>DOM事件处理函数</h3><p>当函数被用作事件处理函数时，它的 <code>this</code> 指向触发事件的元素（一些浏览器在使用非 <code>addEventListener</code> 的函数动态地添加监听函数时不遵守这个约定）。</p>
+<p><img src="https://gitee.com/robertjeff/imagebed/raw/master/images/202110251140343.png" alt="节流效果"></p>
+<h2 id="四、应用场景"><a href="#四、应用场景" class="headerlink" title="四、应用场景"></a>四、应用场景</h2><h3 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h3><p>search搜索联想，用户在不断输入值时，用防抖来节约请求资源。</p>
+<p>登录、发短信等按钮避免用户点击太快，以致于发送了多次请求。</p>
+<p>调整浏览器窗口大小时，resize 次数过于频繁，造成计算过多。</p>
+<p>文本编辑器实时保存，当无任何更改操作一秒后进行保存。</p>
+<h3 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h3><p>scroll 事件，每隔一秒计算一次位置信息等。</p>
+<p>浏览器播放事件，每个一秒计算一次进度信息等。</p>
 
                 
             </div>
@@ -897,7 +772,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://robertjeff2.github.io/posts/a5ceba90.html">https://robertjeff2.github.io/posts/a5ceba90.html</a>
+                    <a href="https://robertjeff2.github.io/posts/581ef0de.html">https://robertjeff2.github.io/posts/581ef0de.html</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -935,8 +810,8 @@ console<span class="token punctuation">.</span><span class="token function">log<
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/JS/">
-                                    <span class="chip bg-color">JS</span>
+                                <a href="/tags/JavaScript/">
+                                    <span class="chip bg-color">JavaScript</span>
                                 </a>
                             
                         </div>
@@ -1408,17 +1283,18 @@ new Valine({
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/posts/404ade06.html">
+                <a href="/posts/581ef0de.html">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928013834.jpg" class="responsive-img" alt="CSS之盒子模型与BFC">
+                        <img src="https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928013251.png" class="responsive-img" alt="JavaScript之防抖和节流">
                         
-                        <span class="card-title">CSS之盒子模型与BFC</span>
+                        <span class="card-title">JavaScript之防抖和节流</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1428,9 +1304,9 @@ new Valine({
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-10-20
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-25
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -1439,11 +1315,12 @@ new Valine({
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/CSS/">
-                        <span class="chip bg-color">CSS</span>
+                    <a href="/tags/JavaScript/">
+                        <span class="chip bg-color">JavaScript</span>
                     </a>
                     
                 </div>
@@ -1457,13 +1334,13 @@ new Valine({
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/posts/753e8c51.html">
+                <a href="/posts/63fa0374.html">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928015500.jpg" class="responsive-img" alt="elementplus踩坑">
+                        <img src="https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928015238.jpg" class="responsive-img" alt="CSS之垂直水平居中">
                         
-                        <span class="card-title">elementplus踩坑</span>
+                        <span class="card-title">CSS之垂直水平居中</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1474,7 +1351,7 @@ new Valine({
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-09-20
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-24
                             </span>
                         <span class="publish-author">
                             
@@ -1487,8 +1364,8 @@ new Valine({
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/vue3/">
-                        <span class="chip bg-color">vue3</span>
+                    <a href="/tags/CSS/">
+                        <span class="chip bg-color">CSS</span>
                     </a>
                     
                 </div>
