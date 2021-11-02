@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="计网之从URL输入到网页产生, 计算机 前端">
+    <meta name="keywords" content="JavaScript之隐式类型转换, 计算机 前端">
     <meta name="description" content="本科 | 计算机科学与技术">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>计网之从URL输入到网页产生 | Jeff</title>
+    <title>JavaScript之隐式类型转换 | Jeff</title>
 
     <link rel="icon" type="image/jpeg" href="https://s1.ax1x.com/2020/05/17/YR20js.jpg">
 
@@ -510,12 +510,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928021129.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928015642.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">计网之从URL输入到网页产生</h1>
+                    <h1 class="description center-align post-title">JavaScript之隐式类型转换</h1>
                 </div>
             </div>
         </div>
@@ -636,8 +636,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
-                                <span class="chip bg-color">计算机网络</span>
+                            <a href="/tags/JavaScript/">
+                                <span class="chip bg-color">JavaScript</span>
                             </a>
                         
                     </div>
@@ -652,28 +652,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-10-27
+                    2021-11-02
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-10-27
+                    2021-11-02
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    899
+                    1.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    4 分
                 </div>
                 
 
@@ -691,104 +691,124 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="输入-URL-敲下回车后发生了什么"><a href="#输入-URL-敲下回车后发生了什么" class="headerlink" title="输入 URL 敲下回车后发生了什么?"></a>输入 URL 敲下回车后发生了什么?</h1><h2 id="一、总体进程"><a href="#一、总体进程" class="headerlink" title="一、总体进程"></a>一、总体进程</h2><p>简单的分析，从输入 <code>URL</code>到回车后发生的行为如下：</p>
+                <h1 id="隐式类型转换"><a href="#隐式类型转换" class="headerlink" title="隐式类型转换"></a>隐式类型转换</h1><h2 id="宽松相等-与严格相等-的区别？"><a href="#宽松相等-与严格相等-的区别？" class="headerlink" title="宽松相等==与严格相等===的区别？"></a>宽松相等==与严格相等===的区别？</h2><p>宽松相等（loose equals）==跟严格相等(strict equals)===都是用来判断两个值是否“相等”，但是两个之间有个很重要的区别，来自《你不知道的JavaScript》(中卷)中给出的正确解释是：“==允许在相等比较中进行强制类型转换，而===不允许”。</p>
+<p>通过==和===的学习，来探究一下JavaScript中的隐式转换的过程。</p>
+<h2 id="非常规情况"><a href="#非常规情况" class="headerlink" title="非常规情况"></a>非常规情况</h2><p>NaN(not a  number)意指无效数值,这是一个特殊值，它和自身不相等，是唯一一个非自反(自反，reflexive,即x === x不成立的值)。</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token number">NaN</span> <span class="token operator">==</span> <span class="token number">NaN</span> <span class="token comment">//false</span>
+<span class="token operator">+</span><span class="token number">0</span> <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">0</span> <span class="token comment">//true</span>
+<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token operator">!</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token comment">//true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>在ES6中可以使用<code>Number.isNan()</code>来判断NaN的存在，同时ES6提供了一个<code>Object.is()</code>方法来判断两个值是否绝对相等，能用<code>==</code>跟<code>===</code>来判断的，尽量不要使用<code>Object.is()</code>，因为前者的效率更高。</p>
+<p><code>[] == ![]</code>中先进行布尔类型强制转换即<code>[]== false</code> </p>
+<h2 id="中的的强制类型转换"><a href="#中的的强制类型转换" class="headerlink" title="==中的的强制类型转换"></a>==中的的强制类型转换</h2><h3 id="字符串和数字之间的相等比较"><a href="#字符串和数字之间的相等比较" class="headerlink" title="字符串和数字之间的相等比较"></a>字符串和数字之间的相等比较</h3><p>如果是字符串与数字比较，那么优先将字符串<code>toNumber()</code> 抽象操作转换为数值型，在进行比较。</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">let</span> result1 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">"55"</span> <span class="token operator">==</span> <span class="token number">55</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// true</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="其他类型和布尔类型之间的比较"><a href="#其他类型和布尔类型之间的比较" class="headerlink" title="其他类型和布尔类型之间的比较"></a>其他类型和布尔类型之间的比较</h3><p>如果比较中存在布尔类型，那么会将布尔类型<code>toNumber() </code>抽象操作转换为数值型，在进行比较。<code>true</code>转换为<code>1</code>，<code>false</code>转换为<code>0</code>。</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">let</span> result1 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token boolean">true</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// true</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="null和undefined之间的相等比较"><a href="#null和undefined之间的相等比较" class="headerlink" title="null和undefined之间的相等比较"></a>null和undefined之间的相等比较</h3><p>在==中，null和undefined相等（他们也与其自身相等），除此之外其他值都不和他们俩相等。</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">let</span> result1 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">null</span> <span class="token operator">==</span> <span class="token keyword">undefined</span> <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// true</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="对象和非对象之间的相等比较"><a href="#对象和非对象之间的相等比较" class="headerlink" title="对象和非对象之间的相等比较"></a>对象和非对象之间的相等比较</h3><p>如果一个操作数是对象，另一个操作数不是，则调用对象的 <code>valueOf()</code>方法取得其原始值，再根据前面的规则进行比较</p>
+<blockquote>
+<p><code>toNumber() </code>抽象操作: </p>
+<p>如果已经是基础类型了，那就不需要转换了</p>
+<p>目标类型为<strong>字符串</strong>就先调用 toString</p>
 <ul>
-<li>URL解析</li>
-<li>DNS 解析</li>
-<li>TCP 连接</li>
-<li>HTTP 请求</li>
-<li>响应请求</li>
-<li>页面渲染</li>
+<li>转换为基础类型的话就返回转换的值</li>
 </ul>
-<h3 id="1-URL解析"><a href="#1-URL解析" class="headerlink" title="1.URL解析"></a>1.URL解析</h3><ol>
-<li>浏览器解析URL获取协议，域名，端口，路径</li>
-</ol>
-<p><img src="https://gitee.com/robertjeff/imagebed/raw/master/images/202110271917907.png" alt="URL结构"></p>
-<h3 id="2-DNS-解析"><a href="#2-DNS-解析" class="headerlink" title="2.DNS 解析"></a>2.DNS 解析</h3><p>2.查看浏览器是否有资源的缓存</p>
-<ol>
-<li><p>有。判断是否过期</p>
-<ol>
-<li>没过期。直接读取缓存</li>
-<li>过期。<ol>
-<li>Etag和If-None-Match</li>
-<li>Last-Modify和lf-Modified-Since</li>
-<li>文件修改了则把新资源发给浏览器（状态码200），没修改则告诉浏览器读取缓存（状态码304）</li>
-</ol>
+<p>目标类型不为<strong>字符串</strong>就先调用 valueOf</p>
+<ul>
+<li>结果为基础类型，就返回转换的值</li>
+<li>结果不是基础类型的话再调用 toString</li>
+</ul>
+<p>如果都没有返回基础类型，就会报错</p>
+</blockquote>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">let</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token function-variable function">valueOf</span><span class="token operator">:</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">}</span>
+<span class="token keyword">let</span> result1 <span class="token operator">=</span> <span class="token punctuation">(</span>obj <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="对象之间的比较"><a href="#对象之间的比较" class="headerlink" title="对象之间的比较"></a>对象之间的比较</h3><p>当两个操作数都是对象时，JavaScript会比较其内部引用，当且仅当他们的引用指向内存中的相同对象（区域）时才相等，即他们在栈内存中的引用地址相同。</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">let obj1 = {name:"xxx"}
+let obj2 = {name:"xxx"}
+let result1 = (obj1 == obj2 ); // false<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="类型转换小结"><a href="#类型转换小结" class="headerlink" title="==类型转换小结"></a>==类型转换小结</h2><ul>
+<li>两个都为简单类型，字符串和布尔值都会转换成数值，再比较</li>
+<li>简单类型与引用类型比较，对象转化成其原始类型的值，再比较</li>
+<li>两个都为引用类型，则比较它们是否指向同一个对象</li>
+<li>null 和 undefined 相等</li>
+<li>存在 NaN 则返回 false</li>
+</ul>
+<p><img src="https://gitee.com/robertjeff/imagebed/raw/master/images/202111022152378.webp" alt="类型转换说明"></p>
+<h2 id="四则运算规则中的类型转换"><a href="#四则运算规则中的类型转换" class="headerlink" title="四则运算规则中的类型转换"></a>四则运算规则中的类型转换</h2><p><strong>加法</strong></p>
+<ul>
+<li>有一方为<code>String</code>，那么另一方也会被转为<code>String</code></li>
+<li>一方为<code>Number</code>,另一方为原始值类型，则将原始值类型转换为<code>Number</code></li>
+<li>一方为<code>Number</code>,另一方为引用类型，双方都转为<code>String</code></li>
+</ul>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token string">'123'</span> <span class="token operator">+</span> <span class="token number">4</span> <span class="token comment">// '1234'</span>
+
+<span class="token number">123</span> <span class="token operator">+</span> <span class="token boolean">true</span> <span class="token comment">// 124</span>
+<span class="token number">123</span> <span class="token operator">+</span> <span class="token keyword">undefined</span> <span class="token comment">// NaN</span>
+<span class="token number">123</span> <span class="token operator">+</span> <span class="token keyword">null</span> <span class="token comment">// 123</span>
+
+<span class="token number">123</span> <span class="token operator">+</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token comment">//  '123'</span>
+<span class="token number">123</span> <span class="token operator">+</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token comment">// '123[object Object]'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>除了加法的运算符来说（-，*，/），会将非<code>Number</code>类型转换为<code>Number</code>类型</p>
+<h2 id="基础类型转换"><a href="#基础类型转换" class="headerlink" title="基础类型转换"></a>基础类型转换</h2><h3 id="布尔Boolean"><a href="#布尔Boolean" class="headerlink" title="布尔Boolean"></a>布尔Boolean</h3><p>常用的两种</p>
+<ul>
+<li><code>!!value</code>：取反两次</li>
+<li><code>Boolean(value)</code>：用Boolean包裹</li>
+</ul>
+<h4 id="转换为假（false）"><a href="#转换为假（false）" class="headerlink" title="转换为假（false）"></a>转换为假（false）</h4><ul>
+<li><code>undefined</code>， <code>null</code>，<code>NaN</code>，<code>''</code>， <code>0</code> –&gt; false</li>
+</ul>
+<h4 id="转换为真（true）"><a href="#转换为真（true）" class="headerlink" title="转换为真（true）"></a>转换为真（true）</h4><ul>
+<li>除上述值外的<code>其它值类型</code>与<code>对象</code>都转为 –&gt; true</li>
+</ul>
+<h3 id="数字Number"><a href="#数字Number" class="headerlink" title="数字Number"></a>数字Number</h3><h4 id="转换为number的方式"><a href="#转换为number的方式" class="headerlink" title="转换为number的方式"></a>转换为<code>number</code>的方式</h4><p>常用的两种</p>
+<ul>
+<li><code>+value</code>：以<code>+</code>开头</li>
+<li><code>Number(value)</code>：用Number包裹</li>
+</ul>
+<h4 id="数组转数字"><a href="#数组转数字" class="headerlink" title="数组转数字"></a>数组转数字</h4><p>Array =&gt; Number</p>
+<ul>
+<li>空数组转为0: <code>[]</code> –&gt; 0</li>
+<li>含有一个元素且为<code>数字</code>或<code>数字字符串</code>则转换为数字：<code>[1]</code>或<code>['1']</code> –&gt; 1</li>
+<li>其余情况转为<code>NaN</code></li>
+</ul>
+<h4 id="值类型转数字"><a href="#值类型转数字" class="headerlink" title="值类型转数字"></a>值类型转数字</h4><ul>
+<li><code>null</code> –&gt; 0</li>
+<li><code>'123'</code> –&gt; 123: 纯数字构成的字符串直接转换为应的数字</li>
+<li><code>true</code> –&gt; 1</li>
+<li><code>false</code> –&gt; 0</li>
+<li><code>'124a'</code> –&gt; NaN</li>
+<li><code>undefined</code> –&gt; NaN</li>
+<li><code>Symbol</code> –&gt; <strong>抛出错误</strong></li>
+</ul>
+<h4 id="引用类型转数字"><a href="#引用类型转数字" class="headerlink" title="引用类型转数字"></a>引用类型转数字</h4><p>除了上述的<code>数组</code>,<code>日期(Date)</code>之外的引用类型(<code>Object</code>)都转为<code>NaN</code></p>
+<h3 id="字符串String"><a href="#字符串String" class="headerlink" title="字符串String"></a>字符串String</h3><h4 id="转字符串的方式"><a href="#转字符串的方式" class="headerlink" title="转字符串的方式"></a>转字符串的方式</h4><ul>
+<li>加空字符串:<code>’’ + value</code></li>
+<li>String(value)：用<code>String</code>包裹</li>
+</ul>
+<h4 id="引用类型转字符串"><a href="#引用类型转字符串" class="headerlink" title="引用类型转字符串"></a>引用类型转字符串</h4><ul>
+<li>数组<ul>
+<li><code>[]</code> –&gt; ‘’ ：空数组转为空串</li>
+<li><code>[2,'3']</code> –&gt; ‘2,3’ ：非空数组的每一项转为字符串再用<code>,</code>分割</li>
+</ul>
 </li>
-</ol>
+<li>对象:<ul>
+<li>{} –&gt; [object Object]</li>
+<li>{a:1} –&gt; [object Object]</li>
+</ul>
 </li>
-<li><p>没有则进行下一步</p>
-</li>
-<li><p>首先进行DNS解析</p>
-<ol>
-<li>寻找浏览器是否存在缓存，若没有</li>
-<li>寻找操作系统是否存在缓存，若没有</li>
-<li>寻找hosts文件中是否有域名和ip的对应关系，若没有</li>
-<li>查找路由器中是否有缓存</li>
-<li>寻找DNS服务器是否没缓存，若没有</li>
-<li>向根域名服务器发送请求</li>
-</ol>
-</li>
-<li><p>生成HTTP请求</p>
-<h3 id="TCP-连接"><a href="#TCP-连接" class="headerlink" title="TCP 连接"></a>TCP 连接</h3></li>
-<li><p>建立TCP连接，三次握手</p>
-<ol>
-<li>客户端发送一个SYN=1,Seq=X的TCP包</li>
-<li>服务端发回一个SYN=1,ACK=X+1，Seq=Y的TCP包</li>
-<li>客户端发送ACK=Y+1，Seq=Y + 1的TCP包</li>
-</ol>
-</li>
-</ol>
-<h3 id="HTTP-请求"><a href="#HTTP-请求" class="headerlink" title="HTTP 请求"></a>HTTP 请求</h3><ol start="6">
-<li><p>如果是HTTP请求</p>
-<p>对HTTP报文进行报文分割并标记序号和端口号</p>
-</li>
-<li><p>如果是HTTPS请求</p>
-<ol>
-<li>将HTTP报文交给TLS处理，TLS和服务端进行TLS握手，交换版本信息，加密算法，压缩算法，随机数（浏览器一个，客户端一个）。</li>
-<li>服务端发送证书，浏览器用CA的公钥对其进行验证。</li>
-<li>浏览器用服务端的公钥加密生成的预备主密码发送给服务端，两个随机数和预备主密码生成主密码</li>
-<li>使用主密码生成对称加密的密钥对，消息认证码的密钥对，对称加密的CBC分组（分组模式）需要的初始化向量密钥对。</li>
-<li>握手之后进行加密，对HTTP报文分组，分组后压缩，压缩后的数据和MAC一起加密。</li>
-<li>对称加密保障私密性，消息认证码保障完整性，数字证书保障认证，防止中间人攻击。</li>
-</ol>
-</li>
-<li><p>对TCP报文打包，加入源IP地址和目标IP地址。</p>
-</li>
-<li><p>根据目标IP地址和路由表，查询下一跳路由。使用ARP查询下一跳路由的MAC地址。</p>
-</li>
-<li><p>对IP报文打包并附上MAC地址。</p>
-</li>
-<li><p>发送数据，服务端接收到请求并返回响应。</p>
-</li>
-</ol>
-<h3 id="响应请求"><a href="#响应请求" class="headerlink" title="响应请求"></a>响应请求</h3><ol start="12">
-<li>浏览器接收到HTTP响应，关闭TCP连接或保持复用，四次挥手。</li>
-<li>（如果返回了HTML）根据响应头的字符集进行解码</li>
-<li>如果响应头没有字符集，则浏览器会默认用一套解码规则，当解析html解析到meta标签中的编码规则时，则替换成新的解码方式重新解码。</li>
-</ol>
-<h3 id="页面渲染"><a href="#页面渲染" class="headerlink" title="页面渲染"></a>页面渲染</h3><ol start="15">
-<li><p>资源预解析，会将一些请求资源提前加入请求队列中</p>
-</li>
-<li><p>解析HTML为DOM树</p>
-</li>
-<li><p>标记化（tokenizing）: 将HTML解析成标记</p>
-</li>
-<li><p>构建树（tree construction）: 根据标记生成DOM树</p>
-</li>
-<li><p>解析CSS为CSSOM</p>
-</li>
-<li><p>根据DOM树和CSSOM生成DOM渲染树</p>
-<p>从DOM的根节点遍历所有可见节点，对其应用对应的CSSOM规则。不可见节点包括（script, meta标签， 被css隐藏的节点）</p>
-</li>
-<li><p>布局：浏览器获取每个渲染对象的位置和尺寸</p>
-</li>
-<li><p>绘制：将计算好的像素绘制到屏幕</p>
-</li>
-<li><p>渲染层/合成层合并</p>
-</li>
-</ol>
-<p><img src="https://gitee.com/robertjeff/imagebed/raw/master/images/202110271939440.png" alt="页面渲染"></p>
+</ul>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">String</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// ''</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">String</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token string">'3'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// '1,2,3'</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">String</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// '[object Object]'</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">String</span><span class="token punctuation">(</span><span class="token punctuation">{</span>a<span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// '[object Object]'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
 
                 
             </div>
@@ -815,7 +835,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://robertjeff2.github.io/posts/922b3870.html">https://robertjeff2.github.io/posts/922b3870.html</a>
+                    <a href="https://robertjeff2.github.io/posts/549bce1.html">https://robertjeff2.github.io/posts/549bce1.html</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -853,8 +873,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
-                                    <span class="chip bg-color">计算机网络</span>
+                                <a href="/tags/JavaScript/">
+                                    <span class="chip bg-color">JavaScript</span>
                                 </a>
                             
                         </div>
@@ -1326,17 +1346,18 @@ new Valine({
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/posts/54fc474f.html">
+                <a href="/posts/549bce1.html">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928014621.jpg" class="responsive-img" alt="JavaScript排序算法">
+                        <img src="https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928015642.jpg" class="responsive-img" alt="JavaScript之隐式类型转换">
                         
-                        <span class="card-title">JavaScript排序算法</span>
+                        <span class="card-title">JavaScript之隐式类型转换</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1346,9 +1367,9 @@ new Valine({
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-10-28
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-02
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -1357,11 +1378,12 @@ new Valine({
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E7%AE%97%E6%B3%95/">
-                        <span class="chip bg-color">算法</span>
+                    <a href="/tags/JavaScript/">
+                        <span class="chip bg-color">JavaScript</span>
                     </a>
                     
                 </div>
@@ -1375,13 +1397,13 @@ new Valine({
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/posts/71f176fb.html">
+                <a href="/posts/421d035.html">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928015500.jpg" class="responsive-img" alt="JavaScript之手写代码">
+                        <img src="https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928013627.jpg" class="responsive-img" alt="JavaScript之原型">
                         
-                        <span class="card-title">JavaScript之手写代码</span>
+                        <span class="card-title">JavaScript之原型</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1392,7 +1414,7 @@ new Valine({
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-26
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-29
                             </span>
                         <span class="publish-author">
                             
