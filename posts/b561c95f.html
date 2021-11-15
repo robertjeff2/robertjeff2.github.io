@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="JavaScript之原型, 计算机 前端">
+    <meta name="keywords" content="JavaScript之事件循环, 计算机 前端">
     <meta name="description" content="本科 | 计算机科学与技术">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>JavaScript之原型 | Jeff</title>
+    <title>JavaScript之事件循环 | Jeff</title>
 
     <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="https://gitee.com/robertjeff/imagebed/raw/master/images/202111112358243.ico">
 
@@ -510,12 +510,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928013627.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928015537.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">JavaScript之原型</h1>
+                    <h1 class="description center-align post-title">JavaScript之事件循环</h1>
                 </div>
             </div>
         </div>
@@ -652,28 +652,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-10-29
+                    2021-11-15
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-10-31
+                    2021-11-15
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    773
+                    49
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    1 分
                 </div>
                 
 
@@ -691,70 +691,21 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="原型prototype"><a href="#原型prototype" class="headerlink" title="原型prototype"></a>原型prototype</h1><h2 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h2><p><code>JavaScript</code> 常被描述为一种基于原型的语言——每个对象拥有一个原型对象</p>
-<p>当试图访问一个对象的属性时，它不仅仅在该对象上搜寻，还会搜寻该对象的原型，以及该对象的原型的原型，依次层层向上搜索，直到找到一个名字匹配的属性或到达原型链的末尾</p>
-<p>准确地说，这些属性和方法定义在Object的构造器函数（constructor functions）之上的<code>prototype</code>属性上，而非实例对象本身</p>
-<p><em>这个属性指向函数的原型对象，这个连接存在于实例与构造函数的原型对象之间，而不是存在于实例与构造函数之间。</em></p>
-<h4 id="构造函数，原型和实例的关系"><a href="#构造函数，原型和实例的关系" class="headerlink" title="构造函数，原型和实例的关系"></a>构造函数，原型和实例的关系</h4><ul>
-<li>每个<code>构造函数</code>都有一个<code>原型对象</code></li>
-<li><code>原型对象</code>都包含一个指向<code>构造函数</code>的<code>指针</code></li>
-<li>而<code>实例</code>都包含一个指向<code>原型对象</code>的<code>指针</code></li>
-</ul>
-<p>下面举个例子：</p>
-<p>函数可以有属性。 每个函数都有一个特殊的属性叫作原型<code>prototype</code></p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span> doSomething<span class="token punctuation">.</span>prototype <span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+                <h1 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h1><p>直接上代码</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span>console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>console<span class="token punctuation">.</span>log<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">requestAnimationFrame</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span>console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+window<span class="token punctuation">.</span><span class="token function-variable function">onclick</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span>console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+window<span class="token punctuation">.</span><span class="token function">dispatchEvent</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Event</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//4</span>
+<span class="token comment">//5</span>
+<span class="token comment">//2</span>
+<span class="token comment">//3</span>
+<span class="token comment">//1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>浏览器中打印输出：</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token punctuation">{</span>
-    constructor<span class="token operator">:</span> ƒ <span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    __proto__<span class="token operator">:</span> <span class="token punctuation">{</span>
-        constructor<span class="token operator">:</span> ƒ <span class="token function">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        hasOwnProperty<span class="token operator">:</span> ƒ <span class="token function">hasOwnProperty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        isPrototypeOf<span class="token operator">:</span> ƒ <span class="token function">isPrototypeOf</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        propertyIsEnumerable<span class="token operator">:</span> ƒ <span class="token function">propertyIsEnumerable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        toLocaleString<span class="token operator">:</span> ƒ <span class="token function">toLocaleString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        toString<span class="token operator">:</span> ƒ <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        valueOf<span class="token operator">:</span> ƒ <span class="token function">valueOf</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>上面这个对象，就是大家常说的原型对象</p>
-<p>可以看到，原型对象有一个自有属性<code>constructor</code>，这个属性指向该函数，如下图关系展示</p>
-<p><img src="https://gitee.com/robertjeff/imagebed/raw/master/images/202110291618874.png" alt="原型对象"></p>
-<h2 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h2><p>原型对象也可能拥有原型，并从中继承方法和属性，一层一层、以此类推。这种关系常被称为原型链 (prototype chain)，它解释了为何一个对象会拥有定义在其他对象中的属性和方法</p>
-<p>在对象实例和它的构造器之间建立一个链接（它是<code>__proto__</code>属性，是从构造函数的<code>prototype</code>属性派生的），之后通过上溯原型链，在构造器中找到这些属性和方法</p>
-<p><img src="https://gitee.com/robertjeff/imagebed/raw/master/images/202110311958186.png" alt="原型链示意图"></p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">Person</span><span class="token punctuation">(</span><span class="token parameter">name</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span>age <span class="token operator">=</span> <span class="token number">18</span><span class="token punctuation">;</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function-variable function">sayName</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-<span class="token comment">// 第二步 创建实例</span>
-<span class="token keyword">var</span> person <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token string">'person'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>根据代码得到下列关系图</p>
-<p><img src="https://gitee.com/robertjeff/imagebed/raw/master/images/202110311557365.png" alt="原型关系图"></p>
-<p>下面分析一下：</p>
-<ul>
-<li>构造函数<code>Person</code>存在原型对象<code>Person.prototype</code></li>
-<li>构造函数生成实例对象<code>person</code>，<code>person</code>的<code>__proto__</code>指向构造函数<code>Person</code>原型对象</li>
-<li><code>Person.prototype.__proto__</code> 指向内置对象，因为 <code>Person.prototype</code> 是个对象，默认是由 <code>Object</code>函数作为类创建的，而 <code>Object.prototype</code> 为内置对象</li>
-<li><code>Person.__proto__</code> 指向内置匿名函数 <code>anonymous</code>，因为 Person 是个函数对象，默认由 Function 作为类创建</li>
-<li><code>Function.prototype</code> 和 <code>Function.__proto__</code>同时指向内置匿名函数 <code>anonymous</code>，这样原型链的终点就是 <code>null</code></li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li>一切对象都是继承自<code>Object</code>对象，<code>Object</code> 对象直接继承根源对象<code>null</code></li>
-<li>一切的函数对象（包括 <code>Object</code> 对象），都是继承自 <code>Function</code> 对象</li>
-<li><code>Object</code> 对象直接继承自 <code>Function</code> 对象</li>
-<li><code>Function</code>对象的<code>__proto__</code>会指向自己的原型对象，最终还是继承自<code>Object</code>对象</li>
-</ul>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6870732239556640775#heading-7">https://juejin.cn/post/6870732239556640775#heading-7</a></li>
-<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain</a></li>
-</ul>
+<p>一张图解答</p>
+<p><img src="https://gitee.com/robertjeff/imagebed/raw/master/images/202111152038067.png"></p>
 
                 
             </div>
@@ -781,7 +732,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://robertjeff2.github.io/posts/421d035.html">https://robertjeff2.github.io/posts/421d035.html</a>
+                    <a href="https://robertjeff2.github.io/posts/b561c95f.html">https://robertjeff2.github.io/posts/b561c95f.html</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1292,17 +1243,18 @@ new Valine({
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/posts/549bce1.html">
+                <a href="/posts/b561c95f.html">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928015642.jpg" class="responsive-img" alt="JavaScript之隐式类型转换">
+                        <img src="https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928015537.jpg" class="responsive-img" alt="JavaScript之事件循环">
                         
-                        <span class="card-title">JavaScript之隐式类型转换</span>
+                        <span class="card-title">JavaScript之事件循环</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1312,9 +1264,9 @@ new Valine({
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-11-02
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-15
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -1323,6 +1275,7 @@ new Valine({
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -1341,13 +1294,13 @@ new Valine({
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/posts/33c658fc.html">
+                <a href="/posts/1a5542ec.html">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928013834.jpg" class="responsive-img" alt="JavaScript之继承">
+                        <img src="https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928014831.jpg" class="responsive-img" alt="Javascript之new操作">
                         
-                        <span class="card-title">JavaScript之继承</span>
+                        <span class="card-title">Javascript之new操作</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1358,7 +1311,7 @@ new Valine({
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-29
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-09
                             </span>
                         <span class="publish-author">
                             
@@ -1371,8 +1324,8 @@ new Valine({
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/JavaScript/">
-                        <span class="chip bg-color">JavaScript</span>
+                    <a href="/tags/Javascript/">
+                        <span class="chip bg-color">Javascript</span>
                     </a>
                     
                 </div>
