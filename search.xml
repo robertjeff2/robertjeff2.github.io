@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>Vue之生命周期</title>
+      <link href="posts/ec8f8493.html"/>
+      <url>posts/ec8f8493.html</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><h2 id="一、概念"><a href="#一、概念" class="headerlink" title="一、概念"></a>一、概念</h2><p>生命周期<code>（Life Cycle）</code>的概念应用很广泛，特别是在政治、经济、环境、技术、社会等诸多领域经常出现，其基本涵义可以通俗地理解为“从摇篮到坟墓”<code>（Cradle-to-Grave）</code>的整个过程。</p><p>Vue 实例有⼀个完整的⽣命周期，也就是从开始创建、初始化数据、编译模版、挂载Dom -&gt; 渲染、更新 -&gt; 渲染、卸载 等⼀系列过程，称这是Vue的⽣命周期。</p><p>我们可以把组件比喻成工厂里面的一条流水线，每个工人（生命周期）站在各自的岗位，当任务流转到工人身边的时候，工人就开始工作</p><blockquote><p>在<code>Vue</code>生命周期钩子会自动绑定 <code>this</code> 上下文到实例中，因此你可以访问数据，对 <code>property</code> 和方法进行运算这意味着<strong>你不能使用箭头函数来定义一个生命周期方法</strong> (例如 <code>created: () =&gt; this.fetchTodos()</code>)</p></blockquote><h2 id="二、有哪些生命周期"><a href="#二、有哪些生命周期" class="headerlink" title="二、有哪些生命周期"></a>二、有哪些生命周期</h2><p>Vue生命周期总共可以分为8个阶段：创建前后, 载入前后,更新前后,销毁前销毁后，以及一些特殊场景的生命周期</p><table><thead><tr><th align="left">生命周期</th><th align="left">描述</th></tr></thead><tbody><tr><td align="left">beforeCreate</td><td align="left">组件实例被创建之初</td></tr><tr><td align="left">created</td><td align="left">组件实例已经完全创建</td></tr><tr><td align="left">beforeMount</td><td align="left">组件挂载之前</td></tr><tr><td align="left">mounted</td><td align="left">组件挂载到实例上去之后</td></tr><tr><td align="left">beforeUpdate</td><td align="left">组件数据发生变化，更新之前</td></tr><tr><td align="left">updated</td><td align="left">组件数据更新之后</td></tr><tr><td align="left">beforeDestroy</td><td align="left">组件实例销毁之前</td></tr><tr><td align="left">destroyed</td><td align="left">组件实例销毁之后</td></tr><tr><td align="left">activated</td><td align="left">keep-alive 缓存的组件激活时</td></tr><tr><td align="left">deactivated</td><td align="left">keep-alive 缓存的组件停用时调用</td></tr><tr><td align="left">errorCaptured</td><td align="left">捕获一个来自子孙组件的错误时被调用</td></tr></tbody></table><ol><li><strong>beforeCreate（创建前）</strong>：数据观测和初始化事件还未开始，此时 data 的响应式追踪、event/watcher 都还没有被设置，也就是说不能访问到data、computed、watch、methods上的方法和数据。</li><li><strong>created（创建后）</strong> ：实例创建完成，实例上配置的 options 包括 data、computed、watch、methods 等都配置完成，但是此时渲染得节点还未挂载到 DOM，所以不能访问到 <code>$el</code> 属性。</li><li><strong>beforeMount（挂载前）</strong>：在挂载开始之前被调用，相关的render函数首次被调用。实例已完成以下的配置：编译模板，把data里面的数据和模板生成html。此时还没有挂载html到页面上。</li><li><strong>mounted（挂载后）</strong>：在el被新创建的 vm.$el 替换，并挂载到实例上去之后调用。实例已完成以下的配置：用上面编译好的html内容替换el属性指向的DOM对象。完成模板中的html渲染到html 页面中。此过程中进行ajax交互。</li><li><strong>beforeUpdate（更新前）</strong>：响应式数据更新时调用，此时虽然响应式数据更新了，但是对应的真实 DOM 还没有被渲染。</li><li><strong>updated（更新后）</strong> ：在由于数据更改导致的虚拟DOM重新渲染和打补丁之后调用。此时 DOM 已经根据响应式数据的变化更新了。调用时，组件 DOM已经更新，所以可以执行依赖于DOM的操作。然而在大多数情况下，应该避免在此期间更改状态，因为这可能会导致更新无限循环。该钩子在服务器端渲染期间不被调用。</li><li><strong>beforeDestroy（销毁前）</strong>：实例销毁之前调用。这一步，实例仍然完全可用，<code>this</code> 仍能获取到实例。</li><li><strong>destroyed（销毁后）</strong>：实例销毁后调用，调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。该钩子在服务端渲染期间不被调用。</li></ol><p>另外还有 <code>keep-alive</code> 独有的生命周期，分别为 <code>activated</code> 和 <code>deactivated</code> 。用 <code>keep-alive</code> 包裹的组件在切换时不会进行销毁，而是缓存到内存中并执行 <code>deactivated</code> 钩子函数，命中缓存渲染后会执行 <code>activated</code> 钩子函数。</p><h2 id="三、生命周期流程"><a href="#三、生命周期流程" class="headerlink" title="三、生命周期流程"></a>三、生命周期流程</h2><p><img src="https://gitee.com/robertjeff/imagebed/raw/master/images/202112041520205.png" alt="生命周期流程图"></p><h2 id="四、created和mounted的区别"><a href="#四、created和mounted的区别" class="headerlink" title="四、created和mounted的区别"></a>四、created和mounted的区别</h2><ul><li>created:在模板渲染成html前调用，即通常初始化某些属性值，然后再渲染成视图。</li><li>mounted:在模板渲染成html后调用，通常是初始化页面完成后，再对html的dom节点进行一些需要的操作。</li></ul>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Vue </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>vue之双向数据绑定</title>
       <link href="posts/f28f4f8a.html"/>
       <url>posts/f28f4f8a.html</url>
