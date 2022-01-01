@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="CSS之垂直水平居中, 计算机 前端">
+    <meta name="keywords" content="2021年终总结, 计算机 前端">
     <meta name="description" content="本科 | 计算机科学与技术">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>CSS之垂直水平居中 | Jeff</title>
+    <title>2021年终总结 | Jeff</title>
 
     <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="https://gitee.com/robertjeff/imagebed/raw/master/images/202111112358243.ico">
 
@@ -510,12 +510,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928015238.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928021707.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">CSS之垂直水平居中</h1>
+                    <h1 class="description center-align post-title">2021年终总结</h1>
                 </div>
             </div>
         </div>
@@ -636,8 +636,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/CSS/">
-                                <span class="chip bg-color">CSS</span>
+                            <a href="/tags/%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/">
+                                <span class="chip bg-color">个人总结</span>
                             </a>
                         
                     </div>
@@ -652,28 +652,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-10-24
+                    2022-01-01
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-10-24
+                    2022-01-01
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    740
+                    1.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    4 分
                 </div>
                 
 
@@ -691,145 +691,40 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="CSS垂直水平居中的几种方法"><a href="#CSS垂直水平居中的几种方法" class="headerlink" title="CSS垂直水平居中的几种方法"></a>CSS垂直水平居中的几种方法</h1><h2 id="文本垂直居中"><a href="#文本垂直居中" class="headerlink" title="文本垂直居中"></a>文本垂直居中</h2><pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">&lt;style rel="stylesheet" type="text/css"&gt;
-.text</span><span class="token punctuation">{</span>
-    <span class="token property">width</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
-    <span class="token property">height</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
-    <span class="token property">text-align</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
-    <span class="token property">line-height</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
-    <span class="token property">background</span><span class="token punctuation">:</span> skyblue
-<span class="token punctuation">}</span>
-&lt;/style&gt;
-&lt;div class=<span class="token string">"text"</span>&gt;文本垂直居中&lt;/div&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>实现效果：</p>
-<p><img src="https://gitee.com/robertjeff/imagebed/raw/master/images/202110241312208.png" alt="文本垂直居中"></p>
-<h2 id="元素垂直居中"><a href="#元素垂直居中" class="headerlink" title="元素垂直居中"></a>元素垂直居中</h2><h3 id="1-绝对定位-利用-calc-计算偏移量"><a href="#1-绝对定位-利用-calc-计算偏移量" class="headerlink" title="1.绝对定位 利用 calc 计算偏移量"></a>1.绝对定位 利用 calc 计算偏移量</h3><p>使用绝对性定位，已知盒子自身宽高，利用 calc 计算偏移量进行定位</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">body</span><span class="token punctuation">{</span><span class="token property">margin</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span><span class="token property">padding</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span><span class="token punctuation">}</span>
-<span class="token selector">.calc</span><span class="token punctuation">{</span>
-  <span class="token property">position</span><span class="token punctuation">:</span> absolute<span class="token punctuation">;</span>
-  <span class="token property">width</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
-  <span class="token property">height</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
-  <span class="token property">left</span><span class="token punctuation">:</span><span class="token function">calc</span><span class="token punctuation">(</span><span class="token punctuation">(</span>100% - 200px<span class="token punctuation">)</span>/2<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token property">top</span><span class="token punctuation">:</span><span class="token function">calc</span><span class="token punctuation">(</span><span class="token punctuation">(</span>100% - 200px<span class="token punctuation">)</span>/2<span class="token punctuation">)</span><span class="token punctuation">;</span>
-   <span class="token property">background</span><span class="token punctuation">:</span> yellowgreen<span class="token punctuation">;</span><span class="token comment">/* 方便看效果 */</span> 
-<span class="token punctuation">}</span>
-&lt;/style&gt;
-&lt;!-- html 结构 --&gt;
-&lt;div class=<span class="token string">"calc"</span>&gt;元素垂直居中&lt;/div&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>实现效果：</p>
-<p><img src="https://gitee.com/robertjeff/imagebed/raw/master/images/202110241316731.png" alt="绝对定位+calc"></p>
-<h3 id="2-绝对定位-利用margin-auto属性"><a href="#2-绝对定位-利用margin-auto属性" class="headerlink" title="2.绝对定位 利用margin:auto属性"></a>2.绝对定位 利用margin:auto属性</h3><p>使用绝对定位，利用 margin:auto 属性，对已知宽高的盒子进行自动偏移定位</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css">&lt;!-- css 样式 --&gt;
-&lt;style rel=<span class="token string">"stylesheet"</span> type=<span class="token string">"text/css"</span>&gt;
-<span class="token comment">/* 绝对性定位 */</span>
-<span class="token selector">.div</span> <span class="token punctuation">{</span>
-    <span class="token property">width</span><span class="token punctuation">:</span>200px<span class="token punctuation">;</span>
-    <span class="token property">height</span><span class="token punctuation">:</span>200px<span class="token punctuation">;</span>
-    <span class="token property">position</span><span class="token punctuation">:</span>absolute<span class="token punctuation">;</span>
-    <span class="token property">top</span><span class="token punctuation">:</span>0<span class="token punctuation">;</span>
-    <span class="token property">right</span><span class="token punctuation">:</span>0<span class="token punctuation">;</span>
-    <span class="token property">bottom</span><span class="token punctuation">:</span>0<span class="token punctuation">;</span>
-    <span class="token property">left</span><span class="token punctuation">:</span>0<span class="token punctuation">;</span>
-    <span class="token property">margin</span><span class="token punctuation">:</span> auto<span class="token punctuation">;</span>
-    <span class="token property">background</span><span class="token punctuation">:</span> skyblue<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-&lt;/style&gt;
-&lt;!-- html 结构 --&gt;
-&lt;div class=<span class="token string">"div"</span>&gt;<span class="token property">margin</span><span class="token punctuation">:</span> auto<span class="token punctuation">;</span>元素垂直居中&lt;/div&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>实现效果：</p>
-<p><img src="https://gitee.com/robertjeff/imagebed/raw/master/images/202110241319737.png" alt="margin:auto"></p>
-<h3 id="3-绝对定位-利用-margin-负值属性"><a href="#3-绝对定位-利用-margin-负值属性" class="headerlink" title="3.绝对定位 利用 margin 负值属性"></a>3.绝对定位 利用 margin 负值属性</h3><p>使用绝对定位，利用 margin 负值属性，对已知宽高的盒子进行计算偏移量进行定位</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">&lt;!-- css 样式 --&gt;
-&lt;style rel="stylesheet" type="text/css"&gt;
-.div</span> <span class="token punctuation">{</span>
-    <span class="token property">position</span><span class="token punctuation">:</span>absolute<span class="token punctuation">;</span>
-    <span class="token property">top</span><span class="token punctuation">:</span>50%<span class="token punctuation">;</span>
-    <span class="token property">left</span><span class="token punctuation">:</span>50%<span class="token punctuation">;</span>
-    <span class="token property">width</span><span class="token punctuation">:</span>200px<span class="token punctuation">;</span>
-    <span class="token property">height</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
-    <span class="token property">margin-top</span><span class="token punctuation">:</span> -100px<span class="token punctuation">;</span>
-    <span class="token property">margin-left</span><span class="token punctuation">:</span> -100px<span class="token punctuation">;</span>
-    <span class="token comment">/*margin-left: -100px 0 0 -100px;*/</span>
-    <span class="token property">background</span><span class="token punctuation">:</span>red<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-&lt;/style&gt;
-&lt;!-- html 结构 --&gt;
-&lt;div class=<span class="token string">"div"</span>&gt;<span class="token property">margin</span><span class="token punctuation">:</span> -100px<span class="token punctuation">;</span>元素垂直居中&lt;/div&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>实现效果：</p>
-<p><img src="https://gitee.com/robertjeff/imagebed/raw/master/images/202110241321361.png" alt="margin负值属性"></p>
-<h3 id="4-绝对定位-利用-transform-属性"><a href="#4-绝对定位-利用-transform-属性" class="headerlink" title="4.绝对定位 利用 transform 属性"></a>4.绝对定位 利用 transform 属性</h3><p>使用绝对定位，利用 transform 属性，对未知宽高的盒子进行自动偏移定位</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">&lt;!-- css 样式 --&gt;
-&lt;style rel="stylesheet" type="text/css"&gt;
-    .div</span> <span class="token punctuation">{</span>
-        <span class="token property">position</span><span class="token punctuation">:</span> absolute<span class="token punctuation">;</span> <span class="token comment">/* 相对定位或绝对定位均可 */</span> 
-        <span class="token property">width</span><span class="token punctuation">:</span>200px<span class="token punctuation">;</span> 
-        <span class="token property">height</span><span class="token punctuation">:</span>200px<span class="token punctuation">;</span> 
-        <span class="token property">top</span><span class="token punctuation">:</span> 50%<span class="token punctuation">;</span> 
-        <span class="token property">left</span><span class="token punctuation">:</span> 50%<span class="token punctuation">;</span> 
-        <span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">translate</span><span class="token punctuation">(</span>-50%<span class="token punctuation">,</span>-50%<span class="token punctuation">)</span><span class="token punctuation">;</span> 
-        <span class="token property">background-color</span><span class="token punctuation">:</span> pink<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    &lt;/style&gt;
-    &lt;!-- html 结构 --&gt;
-    &lt;div class=<span class="token string">"div"</span>&gt;利用 transform 进行垂直居中&lt;/div&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>实现效果：</p>
-<p><img src="https://gitee.com/robertjeff/imagebed/raw/master/images/202110241324809.png" alt="transform属性"></p>
-<h3 id="5-Flex布局"><a href="#5-Flex布局" class="headerlink" title="5.Flex布局"></a>5.Flex布局</h3><p>使用Flex布局，利用 <code>align-items: center;</code> 与 <code>justify-content: center; </code>属性，对未知宽高的盒子进行自动偏移定位，<code>父元素需要设置高度</code></p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">&lt;style type="text/css"&gt;
-.container</span><span class="token punctuation">{</span>
-    <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
-    <span class="token property">align-items</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
-    <span class="token property">justify-content</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
-    <span class="token property">height</span><span class="token punctuation">:</span> 100vh<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span class="token selector">.container div</span><span class="token punctuation">{</span>
-    <span class="token property">width</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
-    <span class="token property">height</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
-    <span class="token property">background-color</span><span class="token punctuation">:</span> greenyellow<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-&lt;/style&gt;
-    
-
-    
-&lt;div class=<span class="token string">"container"</span>&gt;
-&lt;div&gt;利用flex布局进行水平垂直居中&lt;/div&gt;
-&lt;/div&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>实现效果：</p>
-<p><img src="https://gitee.com/robertjeff/imagebed/raw/master/images/202110241339172.png" alt="flex布局"></p>
-<h3 id="6-table-cell-布局"><a href="#6-table-cell-布局" class="headerlink" title="6.table-cell 布局"></a>6.table-cell 布局</h3><p>使用 table-cell 布局，利用 <code>display: table-cell;</code> 、 <code>vertical-align: middle; </code> 与 <code>text-align: center;</code> 属性，对未知宽高的盒子进行自动偏移定位，<code>父元素需要设置宽高</code>，适合有父元素元素的定位</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css">&lt;!-- css 样式 --&gt;
-&lt;style rel=<span class="token string">"stylesheet"</span> type=<span class="token string">"text/css"</span>&gt;
-<span class="token comment">/* table-cell 不需要盒子本身宽高*/</span>
-<span class="token selector">.table-cell</span> <span class="token punctuation">{</span>
-    <span class="token property">display</span><span class="token punctuation">:</span> table-cell<span class="token punctuation">;</span>
-    <span class="token property">vertical-align</span><span class="token punctuation">:</span> middle<span class="token punctuation">;</span>
-    <span class="token property">text-align</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
-    <span class="token property">width</span><span class="token punctuation">:</span> 500px<span class="token punctuation">;</span>
-    <span class="token property">height</span><span class="token punctuation">:</span> 500px<span class="token punctuation">;</span>
-    <span class="token property">background</span><span class="token punctuation">:</span> pink<span class="token punctuation">;</span>
-    
-<span class="token punctuation">}</span>
-<span class="token selector">.table-cell div</span><span class="token punctuation">{</span>
-    <span class="token property">width</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
-    <span class="token property">height</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
-    <span class="token property">background</span><span class="token punctuation">:</span>skyblue<span class="token punctuation">;</span>
-    <span class="token property">display</span><span class="token punctuation">:</span> inline-block<span class="token punctuation">;</span>
-
-<span class="token punctuation">}</span>
-&lt;/style&gt;
-&lt;!-- html 结构 --&gt;
-&lt;div class=<span class="token string">"table-cell"</span>&gt;
-    &lt;div &gt;利用 table-cell 进行水平垂直居中&lt;/div&gt;
-&lt;/div&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>实现效果：</p>
-<p><img src="https://gitee.com/robertjeff/imagebed/raw/master/images/202110241342633.png" alt="tablecell"></p>
+                <h1 id="2021年终小结"><a href="#2021年终小结" class="headerlink" title="2021年终小结"></a>2021年终小结</h1><p>2021终于过去了，你好2022</p>
+<h3 id="读书"><a href="#读书" class="headerlink" title="读书"></a>读书</h3><h5 id="人文"><a href="#人文" class="headerlink" title="人文"></a>人文</h5><p>今年慢慢的找时间读了些人文社科的书，一直觉得人文社科类的书籍对于人的思想上有着积极的意义。</p>
+<p>《一往无前》雷军小米十年创业史，小米是我初中开始了解的品牌，雷军也是一位让我敬佩的企业家，这本书的讲述也让我了解到了小米成长的不易。</p>
+<p>重温《活着》，很经典的一本书，看完总会让人有种珍惜生活的感觉。</p>
+<p>《傅雷家书》，在别人的推荐下阅读了这本书，以家书的形式展现父子之情。</p>
+<p>《罪与罚》，阅读进度10%，不得不说俄国文学里的人物的名字总是如他的作者陀思妥耶夫斯基的名字一样的长，读完还需要一点时间。</p>
+<p>《霍乱时期的爱情》加西亚·马尔克斯，刚开坑的一本书，在群友的安利下所入，希望自己能在其中有所收获。</p>
+<h5 id="技术类"><a href="#技术类" class="headerlink" title="技术类"></a>技术类</h5><p>《JavaScript高级程序设计》（第三版）经典的小红书，学习JS的入门书籍，值得反复看，目前打算看第四版</p>
+<p>《你不知道的JavaScript》（上中卷）众多大佬推荐的小黄书，知识丰富，下卷有点杂，希望明年能在GitHub上看懂还没出版的英文原版</p>
+<p>《JavaScript忍者秘籍》（第二版）群友安利开始看，据说是把闭包，作用域讲的最通俗易懂的一本书</p>
+<p>《CSS揭秘》css是自己最薄弱的地方了，希望通过这本书加深理解</p>
+<h5 id="期望"><a href="#期望" class="headerlink" title="期望"></a>期望</h5><p>来年目标书籍：</p>
+<p>《深入浅出Node.js》继续学习nodejs</p>
+<p>《JavaScript设计模式》加深理解JS</p>
+<p>《JavaScript.DOM高级程序设计》技术人不可不学技术</p>
+<p>还有些人文类的书籍，等手上的坑填完了再加~</p>
+<h3 id="影视"><a href="#影视" class="headerlink" title="影视"></a>影视</h3><p>想起今年年初之时因为就地过年有些无聊，跟摩托车一天在电影院看两部贺岁片的情景…</p>
+<p>今年也抽时间去补了一些经典的影片</p>
+<p>哔哩哔哩看的《大学》，给我留下了很深的印象，沉心做学术是一件很伟大的事情。</p>
+<p>因为自己玩了王者被好兄弟安利去看了《你是我的荣耀》，这部剧剧情紧凑，没什么水的环节，前面演玩游戏部分能给9分，恋爱部分略~</p>
+<p>旁边的舍友平常吃饭会配木鱼水心（B站）的《士兵突击》的影视剪辑解说，遂把《士兵突击》这部经典的军旅剧剪辑全看完了，也改变了以前对于二改创作的偏见，其实二改创作能让人了解更多影视之外的知识，也能看到UP对于影视独特的理解，配合对于小说的补充更是拓宽了视野，八百多万粉丝，也证明其实力不凡。</p>
+<p>顺着历史投稿又把《觉醒年代》看完了，上半年经常听，朋友圈也经常看见却没想着花时间去看原剧，也算是补上了遗憾</p>
+<p>期望明年多看点经典之作</p>
+<h3 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h3><h5 id="大学"><a href="#大学" class="headerlink" title="大学"></a>大学</h5><p>今年算是最后一个蛮完整的大学生涯，把课业都完成了，绩点也还算满意，挂科什么的都是过去式。还剩一个毕业设计与毕业论文，期待自己能完成的好一点，不要像之前的毕设一样匆匆忙忙，草草收场。</p>
+<h5 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h5><p>正式选择了前端开发作为以后的工作方向，现在只是一个小小的初级前端，还是需要努力的。</p>
+<p>前端开发未来是一个趋势，小程序，移动端井喷式发展，还是很看好这个职业的前景。</p>
+<p>堪堪入门，等来年积累了更多经验再来详谈。</p>
+<h3 id="生活"><a href="#生活" class="headerlink" title="生活"></a>生活</h3><p>在2021的冬季，在江西这个熟悉而陌生的地方，遇到了一个温暖的人，给我带来了许多的惊喜，也让我体验了从未有过的感动，带来了太多的欢笑与快乐，也让我第一次觉得有时候做了一些事情是有意义的。</p>
+<p>我也希望着她也能过的快快乐乐的，每天无忧无虑，开开心心的生活，人生总是问题叠着问题，但也是可以解决一个问题在解决下一个问题。</p>
+<p>虽然一直被说不值得，但是我觉得呢，有些事情，现在不做，以后可能就会后悔，我觉得能够陪伴着你，已经是非常开心的一件事情啦，所以不要有什么愧疚噢。</p>
+<p>未来如何我们无从知晓，但是我更希望珍惜当下。</p>
+<p>愿你越来越好</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>愿新年，胜旧年。</p>
+<p>祝陈俐小朋友越来越年轻，天天开心快乐每一天。</p>
 
                 
             </div>
@@ -856,7 +751,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://robertjeff2.github.io/posts/63fa0374.html">https://robertjeff2.github.io/posts/63fa0374.html</a>
+                    <a href="https://robertjeff2.github.io/posts/a23e5172.html">https://robertjeff2.github.io/posts/a23e5172.html</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -894,8 +789,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/CSS/">
-                                    <span class="chip bg-color">CSS</span>
+                                <a href="/tags/%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/">
+                                    <span class="chip bg-color">个人总结</span>
                                 </a>
                             
                         </div>
@@ -1367,17 +1262,18 @@ new Valine({
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/posts/581ef0de.html">
+                <a href="/posts/a23e5172.html">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928013251.png" class="responsive-img" alt="JavaScript之防抖和节流">
+                        <img src="https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928021707.jpg" class="responsive-img" alt="2021年终总结">
                         
-                        <span class="card-title">JavaScript之防抖和节流</span>
+                        <span class="card-title">2021年终总结</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1387,9 +1283,9 @@ new Valine({
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-10-25
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-01
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -1398,11 +1294,12 @@ new Valine({
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/JavaScript/">
-                        <span class="chip bg-color">JavaScript</span>
+                    <a href="/tags/%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/">
+                        <span class="chip bg-color">个人总结</span>
                     </a>
                     
                 </div>
@@ -1416,13 +1313,13 @@ new Valine({
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/posts/7dac7232.html">
+                <a href="/posts/b1dec25d.html">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928020407.jpg" class="responsive-img" alt="JavaScript之数组扁平化实现">
+                        <img src="https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/posts/20200928014929.jpg" class="responsive-img" alt="JavaScript之作用域">
                         
-                        <span class="card-title">JavaScript之数组扁平化实现</span>
+                        <span class="card-title">JavaScript之作用域</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1433,7 +1330,7 @@ new Valine({
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-22
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-18
                             </span>
                         <span class="publish-author">
                             
