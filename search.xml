@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>Vue之TodoList组件</title>
+      <link href="posts/756625ee.html"/>
+      <url>posts/756625ee.html</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="实现一个TodoList组件"><a href="#实现一个TodoList组件" class="headerlink" title="实现一个TodoList组件"></a>实现一个TodoList组件</h2><h3 id="需求："><a href="#需求：" class="headerlink" title="需求："></a>需求：</h3><p>实现一个待办事项组件，使用vue2框架实现。</p><p><img src="https://s2.loli.net/2022/01/11/yOjsvN4CSXWFPHI.png" alt="完成效果"></p><p>要求功能：</p><p>1.添加任务</p><p>2.可以删除指定任务</p><p>3.全选功能</p><p>4.可以一键清除已经完成的任务</p><h3 id="拆分功能"><a href="#拆分功能" class="headerlink" title="拆分功能"></a>拆分功能</h3><p>拆分成四个组件，其中App.vue为主组件，然后根据实现的功能细分为Header|List-&gt;Item|Footer四个子组件，其中Header组件实现的功能为任务的输入，List组件作为展示清单的容器，Item作为容器内的子组件显示详细任务，Footer作为底部功能组件实现全选反选清除任务的功能。</p><h3 id="编写静态组件"><a href="#编写静态组件" class="headerlink" title="编写静态组件"></a>编写静态组件</h3><p>按照功能点拆分后，写好静态部分，此时style记得加上scoped让样式在局部生效，防止冲突。（坑）</p><h3 id="动态组件"><a href="#动态组件" class="headerlink" title="动态组件"></a>动态组件</h3><p>实现动态组件：考虑好数据的存放位置，数据是一个组件在用，还是一些组件在用：</p><p>​            1).一个组件在用：放在组件自身即可。</p><p>​            2). 一些组件在用：放在他们共同的父组件上（状态提升）</p><p>因此决定将数组todos存储在App.vue组件中以便于其他组件调用</p><p>组件格式为数组，里面存储的单元为对象，对象中的属性为id，title标题，done完成状态。</p><pre class="line-numbers language-js" data-language="js"><code class="language-js">todos<span class="token operator">:</span> <span class="token punctuation">[</span>        <span class="token punctuation">{</span> id<span class="token operator">:</span> <span class="token string">"001"</span><span class="token punctuation">,</span> title<span class="token operator">:</span> <span class="token string">"开车"</span><span class="token punctuation">,</span> done<span class="token operator">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>        <span class="token punctuation">{</span> id<span class="token operator">:</span> <span class="token string">"002"</span><span class="token punctuation">,</span> title<span class="token operator">:</span> <span class="token string">"学习"</span><span class="token punctuation">,</span> done<span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>        <span class="token punctuation">{</span> id<span class="token operator">:</span> <span class="token string">"003"</span><span class="token punctuation">,</span> title<span class="token operator">:</span> <span class="token string">"刷力扣"</span><span class="token punctuation">,</span> done<span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>      <span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="header"><a href="#header" class="headerlink" title="header"></a>header</h3><p>此组件实现为添加todos对象，其中id为1000以内的随机数，采用<code>Math.rondom()</code>生成,通过父组件传递过来的addTodoList方法在app.vue中进行函数的添加。</p><h3 id="List"><a href="#List" class="headerlink" title="List"></a>List</h3><p>list组件中采用v-for进行列表展示，其中v-for需要注意绑定id作为key 提高diff算法更新效率。</p><p>子组件为Item，当需要传递方法到Item时需要经过List组件。</p><p>props适用于：</p><p>​    (1).父组件 ==&gt; 子组件 通信</p><p>​    (2).子组件 ==&gt; 父组件 通信（要求父先给子一个函数）</p><h3 id="Item"><a href="#Item" class="headerlink" title="Item"></a>Item</h3><p>作为展示任务的组件，删除按钮<code>display:none</code>为隐藏按钮，注意设置成局部样式防止样式冲突</p><p>给删除按钮绑定点击事件实现交互</p><h3 id="Footer"><a href="#Footer" class="headerlink" title="Footer"></a>Footer</h3><p>全选反选功能可以使用数组高阶函数中的forEach方法进行遍历设置，读取数量判断todo数组的长度</p><p>清除全部已完成的任务使用数组高阶函数filter进行过滤</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Vue </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>2021年终总结</title>
       <link href="posts/a23e5172.html"/>
       <url>posts/a23e5172.html</url>
