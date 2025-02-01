@@ -4,5 +4,10 @@
     "type": "dir",
     "name": "react",
     "label": "React学习汇总"
+  },
+  {
+    "type": "dir",
+    "name": "design-pattern",
+    "label": "设计模式"
   }
 ]
