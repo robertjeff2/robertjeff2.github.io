@@ -9,5 +9,10 @@
     "type": "dir",
     "name": "design-pattern",
     "label": "设计模式"
+  },
+  {
+    "type": "dir",
+    "name": "handwriting",
+    "label": "常见前端手写代码"
   }
 ]
