@@ -3,12 +3,17 @@
   {
     "type": "dir",
     "name": "react",
-    "label": "React学习汇总"
+    "label": "React学习"
   },
   {
     "type": "dir",
     "name": "design-pattern",
     "label": "设计模式"
+  },
+  {
+    "type": "dir",
+    "name": "interview",
+    "label": "前端面试"
   },
   {
     "type": "dir",
