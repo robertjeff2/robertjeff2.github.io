@@ -2,8 +2,13 @@
   "index",
   {
     "type": "dir",
-    "name": "react",
-    "label": "React学习"
+    "name": "interview",
+    "label": "前端面试"
+  },
+  {
+    "type": "dir",
+    "name": "handwriting",
+    "label": "常见前端手写代码"
   },
   {
     "type": "dir",
@@ -12,12 +17,7 @@
   },
   {
     "type": "dir",
-    "name": "interview",
-    "label": "前端面试"
-  },
-  {
-    "type": "dir",
-    "name": "handwriting",
-    "label": "常见前端手写代码"
+    "name": "react",
+    "label": "React学习"
   }
 ]
