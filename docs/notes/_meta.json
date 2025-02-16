@@ -19,5 +19,10 @@
     "type": "dir",
     "name": "react",
     "label": "React学习"
+  },
+  {
+    "type": "dir",
+    "name": "vue",
+    "label": "vue学习"
   }
 ]
