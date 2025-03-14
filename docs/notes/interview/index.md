@@ -1,5 +1,28 @@
 # 前端面试准备
 
+## 目录
+
+- [JS 基础(一)](#JS基础一)
+- [基础类型](#基础类型)
+- [this](#this)
+- [JS 基础(二)](#JS基础二)
+  - [闭包](#闭包)
+  - [深浅拷贝](#深浅拷贝)
+  - [浅拷贝](#浅拷贝)
+  - [深拷贝](#深拷贝)
+  - [原型](#原型)
+- [ES6](#ES6)
+  - [var let const](#var-let-const)
+  - [class 继承](#class-继承)
+  - [模块化](#模块化)
+  - [Proxy](#Proxy)
+  - [数组方法 map,filter,reduce](#数组方法mapfilterreduce)
+- [JS 异步编程题](#JS异步编程题)
+  - [Promise](#Promise)
+- [面试专项题](#面试专项题)
+  - [AJAX fetch axios](#AJAX-fetch-axios)
+  - [防抖节流什么区别](#防抖节流什么区别)
+
 ### **一、技术基础强化（核心必考）**
 
 #### **1. JavaScript 底层原理**
@@ -136,3 +159,404 @@
 
 - **记录问题**：整理被问倒的技术点，针对性补漏。
 - **横向对比**：分析不同公司对“3 年经验前端”的能力侧重（如大厂重算法，创业公司重落地速度）。
+
+### JS 基础(一)
+
+### 基础类型
+
+原始类型&#x20;
+
+boolean null undefined number string symbol
+
+`typeof null`会输出`object` 属于 js 遗留 bug
+
+对象类型
+
+对象类型存储的是地址 原始类型存储的是值
+
+Object function array 等
+
+> typeof 是否能正确判断类型？instanceof 能正确判断对象的原理是什么？
+
+`typeof`对于原始类型来说，除了`null`都可以显示正确的类型
+
+```javascript title="type示例"
+typeof 1; // 'number'
+typeof '1'; // 'string'
+typeof undefined; // 'undefined'
+typeof true; // 'boolean'
+typeof Symbol(); // 'symbol'
+```
+
+对于对象来说 除了 function 都是 Object 所以不准确
+
+instanceof 是用来判断对象的类型 内部机制是通过原型链来判断的
+
+instanceof 支持自定义 , Symbol.hasInstance
+
+### this
+
+```javascript
+function foo() {
+  console.log(this.a);
+}
+var a = 1;
+foo();
+const obj = { a: 2, foo: foo };
+obj.foo();
+const c = new foo();
+```
+
+- 对于直接调用`foo`来说，不管`foo`函数被放在了什么地方，`this`一定是`window`
+- 对于`obj.foo()`来说，我们只需要记住，谁调用了函数，谁就是`this`，所以在这个场景下`foo`函数中的`this`就是`obj`对象
+- 对于`new`的方式来说，`this`被永远绑定在了`c`上面，不会被任何方式改变`this`
+
+箭头函数中的 this 取决的是外层作用域的 this 如果没有,就往上层作用域查找 this
+
+`new`的方式优先级最高，接下来是`bind`这些函数，然后是`obj.foo()`这种调用方式，最后是`foo`这种调用方式，同时，箭头函数的`this`一旦被绑定，就不会再被任何方式所改变。
+
+### JS 基础(二)
+
+> \== 和 === 有什么区别？
+
+`==`来说，如果对比双方的类型**不一样**的话，就会进行**类型转换**，这也就用到了我们上一章节讲的内容。
+
+`===` 是值和类型都相等
+
+#### 闭包
+
+涉及面试题：什么是闭包？
+
+闭包的定义其实很简单：函数 A 内部有一个函数 B，函数 B 可以访问到函数 A 中的变量，那么函数 B 就是闭包。
+
+> 循环中使用闭包解决 `var` 定义函数的问题
+
+```javascript
+for (var i = 1; i <= 5; i++) {
+  setTimeout(function timer() {
+    console.log(i);
+  }, i * 1000);
+}
+//输出一堆6 因为当timer执行的时候 for循环已经执行完毕
+```
+
+可以使用闭包解决
+
+```javascript
+for (var i = 1; i <= 5; i++) {
+  (function (j) {
+    setTimeout(function timer() {
+      console.log(j);
+    }, j * 1000);
+  })(i);
+}
+```
+
+在上述代码中，我们首先使用了立即执行函数将`i`传入函数内部，这个时候值就被固定在了参数`j`上面不会改变，当下次执行`timer`这个闭包的时候，就可以使用外部函数的变量`j`，从而达到目的。
+
+#### 深浅拷贝
+
+#### 浅拷贝
+
+1.浅拷贝通过`Object.assign` 实现, `Object.assign`只会拷贝所有的属性值到新的对象中，如果属性值是对象的话，拷贝的是地址，所以并不是深拷贝。
+
+2.通过展开运算符实现`...`&#x20;
+
+浅拷贝只解决了第一层的问题，如果接下去的值中还有对象的话,就需要用深拷贝实现
+
+#### 深拷贝
+
+1. `JSON.parse(JSON.stringify(object))`
+
+局限性:&#x20;
+
+- 会忽略`undefined`
+- 会忽略`symbol`
+- 不能序列化函数
+- 不能解决循环引用的对象
+
+1. 不包含函数的 可以使用 `MessageChannel`
+2. 自己实现深拷贝
+
+通过判断类型,递归实现
+
+```javascript title="简易版深拷贝"
+function deepClone(obj) {
+  function isObject(o) {
+    return (typeof o === 'object' || typeof o === 'function') && o !== null;
+  }
+
+  if (!isObject(obj)) {
+    throw new Error('非对象');
+  }
+
+  let isArray = Array.isArray(obj);
+  let newObj = isArray ? [...obj] : { ...obj };
+  Reflect.ownKeys(newObj).forEach((key) => {
+    newObj[key] = isObject(obj[key]) ? deepClone(obj[key]) : obj[key];
+  });
+
+  return newObj;
+}
+
+let obj = {
+  a: [1, 2, 3],
+  b: {
+    c: 2,
+    d: 3
+  }
+};
+let newObj = deepClone(obj);
+newObj.b.c = 1;
+console.log(obj.b.c); // 2
+```
+
+#### 原型
+
+> 面试题: 如何理解原型？如何理解原型链？
+
+每一个对象上的内置属性 prototype
+
+对象原型`__proto`\_\_&#x20;
+
+函数原型`prototype`
+
+直接读取存在兼容性问题 Object.getPrototypeOf 方法获取(生产环境)
+
+原型之间相互引用形成了链条,即一个指向一个最顶层为`null`
+
+> 补充：new 操作符做的事情
+
+> 1.创建一个新对象
+
+> 2.将函数的 this 绑定到这个对象上
+
+> 3.将函数的 prottyp 复制给新对象的\[prototype]属性
+
+> 4.默认返回这个新对象
+
+总结:
+
+- `Object`是所有对象的爸爸，所有对象都可以通过`__proto__`找到它
+- `Function`是所有函数的爸爸，所有函数都可以通过`__proto__`找到它
+- 函数的`prototype`是一个对象
+- 对象的`__proto__`属性指向原型，`__proto__`将对象和原型连接起来组成了原型链
+
+### ES6
+
+#### var let const
+
+> 涉及面试题：什么是提升？什么是暂时性死区？var、let 及 const 区别？
+
+var : 使用`var`声明的变量会被提升到作用域的顶部
+
+`let`、`const`因为暂时性死区的原因，不能在声明前使用
+
+`var`在全局作用域下声明变量会导致变量挂载在`window`上，其他两者不会
+
+#### class 继承
+
+在 js 中并不存在类, class 是语法糖本质还是函数
+
+原型继承
+
+```javascript
+function Parent(value) {
+  this.val = value;
+}
+Parent.prototype.getValue = function () {
+  console.log(this.val);
+};
+function Child(value) {
+  Parent.call(this, value);
+}
+Child.prototypy = new Parent();
+const child = new Child(1);
+
+child.getValue(); //1
+chile instanceof Parent; //true
+```
+
+通过`Parent.call(this)`继承父类的属性，然后改变子类的原型为`new Parent()`来继承父类的函数
+
+继承方式优点在于构造函数可以传参，不会与父类引用属性共享，可以复用父类的函数，但是也存在一个缺点就是在继承父类函数的时候调用了父类构造函数，导致子类的原型上多了不需要的父类属性，存在内存上的浪费。
+
+class 继承
+
+```javascript
+class Parent {
+  constructor(value) {
+    this.val = value;
+  }
+  getValue() {
+    console.log(this.val);
+  }
+}
+class Chile extends Parent {
+  constructor(value) {
+    super(value);
+    this.val = value;
+  }
+}
+let child = new Child(1);
+child.getValue(); //1
+chile instanceof Parent; ///true
+```
+
+`class`实现继承的核心在于使用`extends`表明继承自哪个父类，并且在子类构造函数中必须调用`super`，因为这段代码可以看成`Parent.call(this, value)`
+
+#### 模块化
+
+> 面试题：为什么要使用模块化？都有哪几种方式可以实现模块化，各有什么特点？
+
+commonJs&#x20;
+
+在 Webpack 中经常可以见到 ,在打包后的 js 文件里
+
+支持动态导入,使用`require()`
+
+Es module&#x20;
+
+原生实现的模块化方案
+
+```javascript title="Es module"
+// 引入模块 API
+import XXX from './a.js';
+import { XXX } from './a.js';
+// 导出模块 API
+export function a() {}
+export default function () {}
+```
+
+- CommonJS 支持动态导入，也就是`require(${path}/xx.js)`，后者目前不支持，但是已有提案
+- CommonJS 是同步导入，因为用于服务端，文件都在本地，同步导入即使卡住主线程影响也不大。而后者是异步导入，因为用于浏览器，需要下载文件，如果也采用同步导入会对渲染有很大影响
+- CommonJS 在导出时都是值拷贝，就算导出的值变了，导入的值也不会改变，所以如果想更新值，必须重新导入一次。但是 ES Module 采用实时绑定的方式，导入导出的值都指向同一个内存地址，所以导入值会跟随导出值变化
+- ES Module 会编译成`require/exports`来执行的
+
+#### Proxy
+
+vue3 的响应式实现原理&#x20;
+
+```javascript
+let onWatch = (obj, setBind, getLogger) => {
+  let handler = {
+    get(target, property, receiver) {
+      getLogger(target, property);
+      return Reflect.get(target, property, receiver);
+    },
+    set(target, property, value, receiver) {
+      setBind(value, property);
+      return Reflect.set(target, property, value);
+    }
+  };
+  return new Proxy(obj, handler);
+};
+
+let obj = { a: 1 };
+let p = onWatch(
+  obj,
+  (v, property) => {
+    console.log(`监听到属性${property}改变为${v}`);
+  },
+  (target, property) => {
+    console.log(`'${property}' = ${target[property]}`);
+  }
+);
+p.a = 2; // 监听到属性a改变
+p.a; // 'a' = 2
+```
+
+需要我们在`get`中收集依赖，在`set`派发更新，之所以 Vue3.0 要使用`Proxy`替换原本的 API 原因在于`Proxy`无需一层层递归为每个属性添加代理，一次即可完成以上操作，性能上更好，并且原本的实现有一些数据更新不能监听到，但是`Proxy`可以完美监听到任何方式的数据改变，缺陷可能就是浏览器的兼容性不好了。
+
+#### 数组方法 map,filter,reduce
+
+`map`作用是生成一个新数组，遍历原数组，将每个元素拿出来做一些变换然后放入到新的数组中。
+
+```javascript
+[1, 2, 3].map((v) => v + 1); // -> [2, 3, 4]
+```
+
+另外`map`的回调函数接受三个参数，分别是当前索引元素，索引，原数组
+
+> 经典 map 代码题
+
+```javascript
+['1', '2', '3'].map(parseInt); //[1,NaN,NaN]
+```
+
+- 第一轮遍历 parseInt('1', 0) -> 1
+- 第二轮遍历 parseInt('2', 1) -> NaN
+- 第三轮遍历 parseInt('3', 2) -> NaN
+
+`filter`的作用也是生成一个新数组，在遍历数组的时候将返回值为`true`的元素放入新数组，我们可以利用这个函数删除一些不需要的元素
+
+`reduce`可以将数组中的元素通过回调函数最终转换为一个值。
+
+```javascript title="reduce"
+const arr = [1, 2, 3];
+let total = 0;
+for (let i = 0; i < arr.length; i++) {
+  total += arr[i];
+}
+console.log(total); //6
+//转换为
+const arr = [1, 2, 3];
+const sum = arr.reduce((acc, current) => acc + current, 0);
+```
+
+### JS 异步编程题
+
+#### Promise
+
+三个状态
+
+Pending Fulfilled Rejected
+
+在构造`Promise`的时候，构造函数内部的代码是立即执行的
+
+```javascript
+new Promise((resolve, reject) => {
+  console.log('new Promise');
+  resolve('success');
+});
+console.log('finifsh');
+// new Promise -> finifsh
+```
+
+`Promise`实现了链式调用，也就是说每次调用`then`之后返回的都是一个`Promise`，并且是一个全新的`Promise`，原因也是因为状态不可变。如果你在`then`中 使用了`return`，那么`return`的值会被`Promise.resolve()`包装
+
+主要解决了回调地狱的问题
+
+Promise/A+ 规范 手写
+
+### 面试专项题
+
+#### AJAX fetch axios
+
+ajax 是一个技术统称 asynchronous javascript and xml
+
+fetch 是一个浏览器原生 API, 支持 promise
+
+axios 是第三方库 发起网络请求 内部 XMLHttpRequest 和 fetch 来实现
+
+#### 防抖节流什么区别
+
+1.两者区别,2.使用场景 ? &#x20;
+
+防抖: 防止抖动,等不抖了 在执行下一步.
+
+输入框一直输入等输入停止后再去搜索,按钮多次点击&#x20;
+
+```javascript title="手写防抖函数"
+function debounce(fn, delay = 200) {
+  let timer = null;
+  return function () {
+    //如果存在定时器就重新计时
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(() => {
+      fn.apply(this, arguments);
+      timer = null;
+    }, delay);
+  };
+}
+```
