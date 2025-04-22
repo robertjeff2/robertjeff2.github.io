@@ -1,13 +1,13 @@
 [
   {
-    "text": "学习笔记",
+    "text": "知识碎片",
     "link": "/notes/",
     "activeMatch": "/notes/"
   },
   {
-    "text": "前端工程化",
-    "link": "/hello/",
-    "activeMatch": "/hello/"
+    "text": "前端面经",
+    "link": "/experience/",
+    "activeMatch": "/experience/"
   },
   {
     "text": "杂项",

@@ -1,279 +1,142 @@
 # React 基础
 
-## 认识语法
+## 基础
 
-### JSX 语法
+### jsx 语法
 
-- JSX 是 JavaScript 的语法扩展，允许在 JavaScript 中编写类似 HTML 的代码
-- JSX 会被编译为 React.createElement() 调用
-- JSX 中使用大括号 {} 嵌入 JavaScript 表达式
+必须存在根元素 用（）包裹
 
-```jsx
-// JSX语法示例
-const name = 'Jeff';
-const element = (
-  <div className="greeting">
-    <h1>Hello, {name}!</h1>
-    {/* JSX中的注释 */}
-    {2 + 2} {/* 可以在大括号中进行计算 */}
-  </div>
-);
-```
+不能插入 Object
 
-### 组件基础
+变量使用{}
 
-- 函数组件：使用函数声明的简单组件
-- 类组件：使用 class 关键字声明，继承自 React.Component
-- 组件名称必须以大写字母开头
+class 在 jsx 中使用 className 防止 class 关键字冲突
 
-```jsx
-// 函数组件
-function Welcome(props) {
-  return <h1>Hello, {props.name}</h1>;
-}
+style 使用 style={{color:'red',fontSize:'12px'}} 把样式写成对象方式,不支持-连接
 
-// 类组件
-class Welcome extends React.Component {
-  render() {
-    return <h1>Hello, {this.props.name}</h1>;
-  }
-}
+### react 组件
 
-// 使用组件
-<Welcome name="Jeff" />;
-```
+数据构造 constructor this.state={}
 
-### Props 和 State
+绑定方法 method=method.bind(this)
 
-#### Props
+分为函数组件和类组件
 
-- Props 是只读的，用于组件间数据传递
-- Props 可以传递任意类型的数据，包括函数和 JSX
+类组件 class App extends React.component {}
 
-```jsx
-// Props示例
-function UserCard(props) {
-  return (
-    <div className="user-card">
-      <img src={props.avatar} alt="avatar" />
-      <h2>{props.name}</h2>
-      <button onClick={props.onClick}>{props.buttonText}</button>
-    </div>
-  );
-}
+事件绑定：方法小驼峰命名，通过{}传入方法
 
-// 使用组件并传递props
-<UserCard
-  avatar="/avatar.jpg"
-  name="Jeff"
-  buttonText="查看详情"
-  onClick={() => alert('点击了按钮')}
-/>;
-```
+更新数据： this.setState({变量名:变量值})
 
-#### State
+setState 可能是同步也可能是异步的
 
-- State 用于管理组件内部状态
-- 使用 useState Hook 或 class 组件中的 setState 更新状态
-- State 更新可能是异步的
+组件间数据传递 props 在组件中 使用 this.props.xx 读取
 
-```jsx
-// 函数组件中的State
-import { useState } from 'react';
+传值: stuInfo={xxx} content="asdd" num={112}
 
-function Counter() {
-  const [count, setCount] = useState(0);
+props.children 获取\<button>新建\<button />的内容
 
-  return (
-    <div>
-      <p>当前计数: {count}</p>
-      <button onClick={() => setCount(count + 1)}>增加</button>
-    </div>
-  );
-}
+使用 default 设置 props 的默认值
 
-// 类组件中的State
-class Counter extends React.Component {
-  state = { count: 0 };
+Hello.defalutProps={}&#x20;
 
-  increment = () => {
-    this.setState((state) => ({
-      count: state.count + 1
-    }));
-  };
+react 的状态提升 相当于父组件给子组件传递一个方法,在这个方法中改变父组件的值,相当于 vue 中的 emit
 
-  render() {
-    return (
-      <div>
-        <p>当前计数: {this.state.count}</p>
-        <button onClick={this.increment}>增加</button>
-      </div>
-    );
-  }
-}
-```
+早期类组件才能设置状态(现在有 hooks)
 
-### 生命周期
+&#x20;&#x20;
 
-#### 函数组件（Hooks）
+受控组件&#x20;
 
-- useEffect：处理副作用
-- useLayoutEffect：同步执行副作用
-- 自定义 Hooks：复用状态逻辑
+原生: 获取 DOM 组件 拿到 value 值
 
-```jsx
-// useEffect示例
-import { useState, useEffect } from 'react';
+react value 绑定到 state onChange 绑定输入方法&#x20;
 
-function UserProfile({ userId }) {
-  const [user, setUser] = useState(null);
+表单控件完全受控于 state&#x20;
 
-  useEffect(() => {
-    // 组件挂载或userId变化时获取用户数据
-    fetch(`/api/users/${userId}`)
-      .then((res) => res.json())
-      .then((data) => setUser(data));
+非受控组件:不绑定在 state&#x20;
 
-    // 清理函数
-    return () => {
-      // 组件卸载时执行清理
-      console.log('组件卸载');
-    };
-  }, [userId]); // 依赖项数组
+在 react 中使用 React.createRef() //创建一个 ref 绑定到组件上,可以通过 ref 获取到组件
 
-  if (!user) return <div>加载中...</div>;
+表单数据用 ref 去 DOM 节点获取
 
-  return <div>{user.name}</div>;
-}
-```
+生命周期
 
-#### 类组件
+诞生到销毁经历了一系列过程就叫做生命周期
 
-- 挂载阶段：constructor -> render -> componentDidMount
-- 更新阶段：render -> componentDidUpdate
-- 卸载阶段：componentWillUnmount
+render componentDidMount 调用接口
 
-```jsx
-class LifecycleDemo extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { count: 0 };
-    console.log('1. constructor');
-  }
+componentDidupdate &#x20;
 
-  componentDidMount() {
-    console.log('3. componentDidMount');
-  }
+&#x20;componentDidUnmount 销毁计时器
 
-  componentDidUpdate(prevProps, prevState) {
-    console.log('4. componentDidUpdate');
-  }
+### hook
 
-  componentWillUnmount() {
-    console.log('5. componentWillUnmount');
-  }
+常用的有 useState useEffect
 
-  render() {
-    console.log('2. render');
-    return <div>{this.state.count}</div>;
-  }
-}
-```
+在没有编写 state 的情况下使用 state
 
-### 事件处理
+useEffect &#x20;
 
-- React 事件使用驼峰命名
-- 事件处理器接收合成事件对象（SyntheticEvent）
-- 注意绑定 this 的问题（箭头函数或 bind）
+- 纯函数:一个确切的参数在函数中运行后一定能得到一个确切的值
+- 如果一个函数存在副作用 则称该函数不是一个纯函数,副作用的结果就是不可控不可预期
+- 例子:发送请求,监听注册,取消注册,以前是使用生命周期勾子,现在使用 uesEffect
+- 是 React 中的一个 Hook，用于在函数组件中执行副作用操作。副作用操作包括数据获取、订阅、手动更改 DOM，以及在组件生命周期的特定阶段执行代码。
 
-```jsx
-class Toggle extends React.Component {
-  state = { isOn: false };
+使用场景
 
-  // 使用箭头函数自动绑定this
-  handleClick = (e) => {
-    // e 是合成事件对象
-    this.setState((state) => ({
-      isOn: !state.isOn
-    }));
-  };
+- 数据获取 ：在组件挂载时获取数据。
+- 订阅 ：在组件挂载时订阅事件，并在卸载时取消订阅。
+- 手动 DOM 操作 ：在组件更新时手动操作 DOM。
 
-  render() {
-    return (
-      <button onClick={this.handleClick}>
-        {this.state.isOn ? 'ON' : 'OFF'}
-      </button>
-    );
-  }
-}
+useEffect 是 React 函数组件中处理副作用的主要工具，类似于类组件中的生命周期方法 componentDidMount 、 componentDidUpdate 和 componentWillUnmount 。
 
-// 函数组件中的事件处理
-function Form() {
-  const handleSubmit = (e) => {
-    e.preventDefault(); // 阻止表单默认提交
-    console.log('表单提交');
-  };
+// 可选的清理函数
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <button type="submit">提交</button>
-    </form>
-  );
-}
-```
+return()=>{
 
-### 条件渲染
+// 清理逻辑
 
-- 使用 if 语句或三元运算符
-- 使用逻辑运算符 &&
-- 防止组件返回 null 导致的问题
+console.log('Cleaning up...');
 
-```jsx
-function Greeting({ isLoggedIn }) {
-  // if语句条件渲染
-  if (isLoggedIn) {
-    return <h1>欢迎回来！</h1>;
-  }
-  return <h1>请登录。</h1>;
-}
+}; 在下一次执行 effect 函数之前执行
 
-function Notification({ message }) {
-  return (
-    <div>
-      {/* 使用&&运算符 */}
-      {message && <p>{message}</p>}
+依赖数组:
 
-      {/* 使用三元运算符 */}
-      {message ? <p>{message}</p> : <p>暂无消息</p>}
-    </div>
-  );
-}
-```
+- 无依赖数组 ：如果不提供依赖数组，effect 函数将在每次组件渲染后执行。
+- 空依赖数组 ：如果提供一个空数组，effect 函数只会在组件挂载和卸载时执行一次。
+- 依赖数组 ：如果提供了依赖数组，effect 函数将在组件挂载、卸载以及依赖项发生变化时执行。
 
-### 列表渲染
+自定义 hook
 
-- 使用 map 方法渲染列表
-- key 属性的重要性和正确使用
-- 避免使用索引作为 key
+用 use 开头 并在内部调用原生 hooks
 
-```jsx
-function TodoList({ todos }) {
-  return (
-    <ul>
-      {todos.map((todo) => (
-        // 使用唯一的id作为key
-        <li key={todo.id}>{todo.text}</li>
-      ))}
-    </ul>
-  );
-}
+### react-router
 
-// 使用组件
-const todos = [
-  { id: 1, text: '学习React' },
-  { id: 2, text: '写代码' },
-  { id: 3, text: '写文档' }
-];
+包裹根组件 BrowserRouter HashRouter 分别启动哈希模式和 history 模式
 
-<TodoList todos={todos} />;
-```
+Router 主要是提供一个上下文环境
+
+Route 在里面书写对应的路由 path 路由 element 匹配的组件
+
+Navigate 导航到某个组件 调用后返回一个函数
+
+useLocation()拿到跳转给的参数 location.state
+
+NavLink a 标签
+
+useParams 获取动态参数
+
+useRouter 类似 vue 配置路由
+
+Outlet 父组件里面嵌套子路由使用
+
+在 useRoutes 配置 children 属性
+
+### redux 状态管理
+
+组件与组件之间统一的共享状态抽离到 redux 管理
+
+props.store.getStore 获取仓库数据
+
+redux 直接绑定到 app 组件
