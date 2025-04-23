@@ -1,28 +1,5 @@
 # 前端面试准备
 
-## 目录
-
-- [JS 基础(一)](#JS基础一)
-- [基础类型](#基础类型)
-- [this](#this)
-- [JS 基础(二)](#JS基础二)
-  - [闭包](#闭包)
-  - [深浅拷贝](#深浅拷贝)
-  - [浅拷贝](#浅拷贝)
-  - [深拷贝](#深拷贝)
-  - [原型](#原型)
-- [ES6](#ES6)
-  - [var let const](#var-let-const)
-  - [class 继承](#class-继承)
-  - [模块化](#模块化)
-  - [Proxy](#Proxy)
-  - [数组方法 map,filter,reduce](#数组方法mapfilterreduce)
-- [JS 异步编程题](#JS异步编程题)
-  - [Promise](#Promise)
-- [面试专项题](#面试专项题)
-  - [AJAX fetch axios](#AJAX-fetch-axios)
-  - [防抖节流什么区别](#防抖节流什么区别)
-
 ### **一、技术基础强化（核心必考）**
 
 #### **1. JavaScript 底层原理**
@@ -164,7 +141,7 @@
 
 ### 基础类型
 
-原始类型&#x20;
+原始类型
 
 boolean null undefined number string symbol
 
@@ -260,7 +237,7 @@ for (var i = 1; i <= 5; i++) {
 
 1.浅拷贝通过`Object.assign` 实现, `Object.assign`只会拷贝所有的属性值到新的对象中，如果属性值是对象的话，拷贝的是地址，所以并不是深拷贝。
 
-2.通过展开运算符实现`...`&#x20;
+2.通过展开运算符实现`...`
 
 浅拷贝只解决了第一层的问题，如果接下去的值中还有对象的话,就需要用深拷贝实现
 
@@ -268,7 +245,7 @@ for (var i = 1; i <= 5; i++) {
 
 1. `JSON.parse(JSON.stringify(object))`
 
-局限性:&#x20;
+局限性:
 
 - 会忽略`undefined`
 - 会忽略`symbol`
@@ -317,7 +294,7 @@ console.log(obj.b.c); // 2
 
 每一个对象上的内置属性 prototype
 
-对象原型`__proto`\_\_&#x20;
+对象原型`__proto`\_\_
 
 函数原型`prototype`
 
@@ -409,13 +386,13 @@ chile instanceof Parent; ///true
 
 > 面试题：为什么要使用模块化？都有哪几种方式可以实现模块化，各有什么特点？
 
-commonJs&#x20;
+commonJs
 
 在 Webpack 中经常可以见到 ,在打包后的 js 文件里
 
 支持动态导入,使用`require()`
 
-Es module&#x20;
+Es module
 
 原生实现的模块化方案
 
@@ -435,7 +412,7 @@ export default function () {}
 
 #### Proxy
 
-vue3 的响应式实现原理&#x20;
+vue3 的响应式实现原理
 
 ```javascript
 let onWatch = (obj, setBind, getLogger) => {
@@ -531,7 +508,7 @@ Promise/A+ 规范 手写
 
 ### 面试专项题
 
-#### AJAX fetch axios
+#### 1.AJAX fetch axios
 
 ajax 是一个技术统称 asynchronous javascript and xml
 
@@ -539,13 +516,13 @@ fetch 是一个浏览器原生 API, 支持 promise
 
 axios 是第三方库 发起网络请求 内部 XMLHttpRequest 和 fetch 来实现
 
-#### 防抖节流什么区别
+#### 2.防抖节流什么区别
 
-1.两者区别,2.使用场景 ? &#x20;
+1.两者区别,2.使用场景 ?
 
 防抖: 防止抖动,等不抖了 在执行下一步.
 
-输入框一直输入等输入停止后再去搜索,按钮多次点击&#x20;
+输入框一直输入等输入停止后再去搜索,按钮多次点击
 
 ```javascript title="手写防抖函数"
 function debounce(fn, delay = 200) {
@@ -561,7 +538,7 @@ function debounce(fn, delay = 200) {
 }
 ```
 
-#### px % em rem vw/vh 区别
+#### 3.px % em rem vw/vh 区别
 
 px 基本单位(绝对单位)
 
@@ -573,7 +550,7 @@ rem 相对于根节点
 
 vw 屏幕宽度 1% vh 屏幕高度 1% vmin 最小值 vmax 最大值
 
-#### 什么时候不能使用箭头函数
+#### 4.什么时候不能使用箭头函数
 
 箭头函数有什么缺点? 没有 arguments 获取不到
 
@@ -581,7 +558,7 @@ vw 屏幕宽度 1% vh 屏幕高度 1% vmin 最小值 vmax 最大值
 
 vue 组件本质上是一个 JS 对象 react (非 hooks)本质上是 es6class
 
-#### TCP 三次握手和四次挥手
+#### 5.TCP 三次握手和四次挥手
 
 建立 TCP 连接 ⇒ 在传输内容
 
@@ -603,7 +580,7 @@ vue 组件本质上是一个 JS 对象 react (非 hooks)本质上是 es6class
 
 4.客户端回应 ACK 断开连接
 
-#### for..in 和 for ..of
+#### 6.for..in 和 for ..of
 
 使用于不同的数据类型
 
@@ -613,7 +590,7 @@ for of 不能遍历对象 可以遍历 MAP SET 构造器
 
 for in 用来访问可枚举数据 enmumerable:true 表示支持枚举 比如对象,数组等
 
-#### for await of 异步迭代循环
+#### 7.for await of 异步迭代循环
 
 for await (let res of list ){
 
@@ -622,3 +599,28 @@ for await (let res of list ){
 }
 
 允许以同步的方式编写异步代码，极大地简化了异步编程。它消除了手动处理 Promise 和回调函数的需要，使得代码更加简洁和易于理解。此外，它还提供了错误处理机制：如果在迭代过程中发生错误，循环会立即终止，并将错误抛出，你可以使用`try...catch`语句来捕获和处理这些错误。
+
+#### 8.虚拟列表实现
+
+● 定高的实现方式
+
+1. 根据元素个数 \* 高度定义一个外部容器
+2. 根据视口高度 / 元素高度得到当前能展示的元素个数，并在此基础上加上前方和后方用来做缓冲的虚拟区域元素个数
+3. 监听 scroll 事件，获取当前 scrollTop 值，根据 scrollTop 值 / 元素高度获得展示的第一个元素的索引值，根据这个索引值，计算需要渲染的第一个元素和最后一个元素，即加上虚拟区和展示区的元素
+4. 此时每一个元素都是绝对定位的，高度为每一个元素的高度 \* 之前元素的个数
+
+● 不定高的实现方式
+
+1. 难点：首先外部容器的总长不确定，其次无法通过 scrollTop / 元素高度获得初识索引值
+2. 针对难点 1，可以初始假定一个足够元素长度，因为精确地计算出容器总高度的意义不是很大，之后在每次滚动时，累加计算已经滚动过的元素高度，加上剩余元素的假定高度，实时更新容器的最终高度，但是 pc 端会出现拖拽滑轮滚动比不一致情况
+3. 针对难点 2，根据视口高度累加展示的元素高度和，如果滑动到的高度高于已经累加过的元素高度和，则再进行累加，直到满足高度。但是需要一个 map 用来存储已经滑动过的元素高度信息，包括元素自身的高度和它之前的总高度 => 双链表+哈希
+
+#### flex:1 代表什么
+
+flex:1 等价于 flex-grow:1; flex-shrink:1; flex-basis:0%;
+
+- 其中，flex-grow:1 表示该元素可以按比例分配父容器剩余空间；
+- flex-shrink:1 表示当空间不足时可以缩小；
+- flex-basis:0% 表示初始主轴空间为 0，所有空间都由 flex-grow 分配。
+  flex:1 让元素在弹性布局中“自适应填充剩余空间”，常用于响应式布局
+  如果有多个都是 flex:1 的元素，它们会按照它们的 flex-grow 属性值的比例来分配剩余空间。

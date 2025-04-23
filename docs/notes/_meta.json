@@ -24,5 +24,10 @@
     "type": "dir",
     "name": "vue",
     "label": "vue学习"
+  },
+  {
+    "type": "dir",
+    "name": "leetcode",
+    "label": "算法"
   }
 ]
